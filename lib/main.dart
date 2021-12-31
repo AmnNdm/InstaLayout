@@ -3,9 +3,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:insta_layout/activity.dart';
+import 'package:insta_layout/home/messages/messages.dart';
 import 'package:insta_layout/others/customnavigationbar.dart';
+import 'package:insta_layout/post.dart';
+import 'package:insta_layout/profile.dart';
+import 'package:insta_layout/search/explore.dart';
+import 'package:insta_layout/search/explorevideos.dart';
+import 'package:insta_layout/search/search.dart';
+import 'package:insta_layout/search/searchcontent.dart';
 import 'package:insta_layout/splash.dart';
-
 import 'home/home.dart';
 
 void main() {
@@ -52,24 +59,35 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       builder: () => GetMaterialApp(
-          title: 'Flutter Demo',
-          darkTheme: ThemeData(
-              brightness: Brightness.dark,
-              primarySwatch: black,
-              primaryColor: Colors.black26,
-              scaffoldBackgroundColor: Colors.black,
-              backgroundColor: Colors.black,
-              canvasColor: Colors.black),
-          theme: ThemeData(
-              brightness: Brightness.light,
-              primarySwatch: white,
-              primaryColor: Colors.white,
-              scaffoldBackgroundColor: Colors.white,
-              backgroundColor: Colors.white,
-              canvasColor: Colors.white),
-          home: const CustomBottomBar()
-          // const SplashScreen(),
-          ),
+        title: 'Flutter Demo',
+        darkTheme: ThemeData(
+            brightness: Brightness.dark,
+            primarySwatch: black,
+            primaryColor: Colors.black26,
+            scaffoldBackgroundColor: Colors.black,
+            backgroundColor: Colors.black,
+            canvasColor: Colors.black),
+        theme: ThemeData(
+            brightness: Brightness.light,
+            primarySwatch: white,
+            primaryColor: Colors.white,
+            scaffoldBackgroundColor: Colors.white,
+            backgroundColor: Colors.white,
+            canvasColor: Colors.white),
+        home: const CustomBottomBar(),
+        // const SplashScreen(),
+        initialRoute: "/",
+        routes: {
+          "/search": (context) => SearchScreen(),
+          "/post": (context) => PostScreen(),
+          "/activity": (context) => ActivityScreen(),
+          "/profile": (context) => ProfileScreen(),
+          "/message": (context) => MessagesScreen(),
+          "/searchcontent": (context) => SearchContent(),
+          "/explorevideos": (context) => ExploreVideos(),
+          "/explore": (context) => Explore()
+        },
+      ),
     );
   }
 }

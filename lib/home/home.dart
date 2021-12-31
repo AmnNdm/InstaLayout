@@ -17,32 +17,64 @@ class MyHomePage extends GetView<HomeController> {
   Widget build(BuildContext context) {
     // isdark = brightness == Brightness.dark;
     return Scaffold(
-      appBar: appbar(
-        Text("InstaLayout"),
-        action: GestureDetector(
-            onTap: () {
-              Get.to(() => const MessagesScreen());
-            },
-            child: Image.asset(
-              Constants.message,
-              scale: 2.5.h,
-              color: isDarkMode(),
-            )),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            stories(context),
-            Divider(
-              height: 0.h,
-            ),
-            posts()
-          ],
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return [
+            appbar(Text("InstaLayout"),
+                action: GestureDetector(
+                    onTap: () {
+                      Get.to(() => const MessagesScreen());
+                    },
+                    child: Image.asset(
+                      Constants.message,
+                      scale: 2.5.h,
+                      color: isDarkMode(),
+                    )),
+                sliver: true)
+          ];
+        },
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              stories(context),
+              Divider(
+                height: 0.h,
+              ),
+              posts()
+            ],
+          ),
         ),
       ),
     );
+    // Scaffold(
+    //   appBar: appbar(
+    //     Text("InstaLayout"),
+    //     action: GestureDetector(
+    //         onTap: () {
+    //           Get.to(() => const MessagesScreen());
+    //         },
+    //         child: Image.asset(
+    //           Constants.message,
+    //           scale: 2.5.h,
+    //           color: isDarkMode(),
+    //         )),
+    //   ),
+    //   body: SingleChildScrollView(
+    //     child: Column(
+    //       mainAxisAlignment: MainAxisAlignment.center,
+    //       mainAxisSize: MainAxisSize.min,
+    //       children: <Widget>[
+    //         stories(context),
+    //         Divider(
+    //           height: 0.h,
+    //         ),
+    //         posts()
+    //       ],
+    //     ),
+    //   ),
+    // );
   }
 
   Widget stories(BuildContext context) {
@@ -82,10 +114,10 @@ class MyHomePage extends GetView<HomeController> {
       child: Column(
         children: [
           Stack(children: [
-            circularBorder(72, 75),
+            circularBorder(70, 75),
             Positioned(
                 left: 4.w,
-                top: 4.h,
+                top: 3.h,
                 child: index == 0
                     ? profileImage(34, Constants.user0)
                     : profileImage(34, image)),
@@ -93,7 +125,7 @@ class MyHomePage extends GetView<HomeController> {
                 visible: index == 0,
                 child: Positioned(
                     left: 50.w,
-                    top: 55.h,
+                    top: 50.h,
                     child: CircleAvatar(
                       radius: 10.r,
                       backgroundColor: Colors.blue,
@@ -105,7 +137,7 @@ class MyHomePage extends GetView<HomeController> {
                     )))
           ]),
           SizedBox(
-            height: 5.h,
+            height: 3.h,
           ),
           Text(
             "User $index",

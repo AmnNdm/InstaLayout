@@ -7,7 +7,8 @@ import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:insta_layout/home/homecontroller.dart';
-import '../search.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import '../search/search.dart';
 import '../others/constants.dart';
 import 'messages/messagesearch.dart';
 
@@ -21,27 +22,38 @@ Color isDarkMode() {
 
 EdgeInsetsGeometry allPadding = EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 8.h);
 
-appbar(
-  Widget title, {
-  bool bottom = false,
-  Widget? flexibleWidget,
-  Widget? action,
-}) {
-  return AppBar(
-    backgroundColor:
-        (MediaQuery.of(Get.context!).platformBrightness == Brightness.dark)
-            ? Colors.black
-            : Colors.white,
-    elevation: 0.0,
-    title: title,
-    actions: action != null ? [action] : null,
-    bottom: bottom
-        ? PreferredSize(
-            child: flexibleWidget!,
-            preferredSize:
-                Size.fromHeight(MediaQuery.of(Get.context!).size.height / 16))
-        : null,
-  );
+appbar(Widget title,
+    {bool bottom = false,
+    Widget? flexibleWidget,
+    Widget? action,
+    sliver = false}) {
+  return sliver
+      ? SliverAppBar(
+          floating: true,
+          pinned: true,
+          backgroundColor: (MediaQuery.of(Get.context!).platformBrightness ==
+                  Brightness.dark)
+              ? Colors.black
+              : Colors.white,
+          title: title,
+          elevation: 0.2,
+          actions: action != null ? [action] : null,
+        )
+      : AppBar(
+          backgroundColor: (MediaQuery.of(Get.context!).platformBrightness ==
+                  Brightness.dark)
+              ? Colors.black
+              : Colors.white,
+          elevation: 0.0,
+          title: title,
+          actions: action != null ? [action] : null,
+          bottom: bottom
+              ? PreferredSize(
+                  child: flexibleWidget!,
+                  preferredSize: Size.fromHeight(
+                      MediaQuery.of(Get.context!).size.height / 16))
+              : null,
+        );
 }
 
 Widget iconButtons() {
@@ -158,15 +170,19 @@ activeButton(BuildContext context, String title, bool isactive) {
   );
 }
 
-Widget searchBar() {
+Widget searchBar(
+    {required Widget page, bool? withNavbar, required BuildContext context}) {
   return TextField(
     decoration: InputDecoration(
       isDense: true,
       contentPadding: EdgeInsets.zero,
       hintText: "Search",
       hintStyle: TextStyle(fontSize: 16.sp),
-      focusColor: isDarkMode(),
-      prefixIcon: const Icon(Icons.search_outlined),
+      // focusColor: isDarkMode(),
+      prefixIcon: Icon(
+        Icons.search_outlined,
+        color: Colors.grey.shade600,
+      ),
       border: OutlineInputBorder(
           gapPadding: 0,
           borderRadius: BorderRadius.circular(8.r),
@@ -175,7 +191,8 @@ Widget searchBar() {
     ),
     readOnly: true,
     onTap: () {
-      Get.to(() => MessageSearchScreen());
+      pushNewScreen(context, screen: page, withNavBar: withNavbar);
+      // Get.to(() => page);
     },
   );
 }

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:insta_layout/home/messages/messagesearch.dart';
 import 'package:insta_layout/home/messages/requests.dart';
 import 'package:insta_layout/home/components.dart';
 import 'package:insta_layout/others/constants.dart';
@@ -79,7 +80,7 @@ class MessagesScreen extends GetView<HomeController> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          searchBar(),
+          searchBar(page: MessageSearchScreen(), context: context),
           SizedBox(
             height: 10.h,
           ),

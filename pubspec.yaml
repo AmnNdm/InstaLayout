@@ -39,6 +39,7 @@ dependencies:
   flutter_screenutil:
   flutter_native_splash: ^1.3.2
   flutter_search_bar:
+  flutter_staggered_grid_view:
 
 dev_dependencies:
   flutter_test:
