@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:insta_layout/home/comments.dart';
-import 'package:insta_layout/home/components.dart';
+import 'package:insta_layout/others/components.dart';
 import 'package:insta_layout/others/constants.dart';
-import 'package:insta_layout/home/homecontroller.dart';
+import 'package:insta_layout/home/controller/homecontroller.dart';
 import 'package:insta_layout/home/messages/messages.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -20,7 +19,7 @@ class MyHomePage extends GetView<HomeController> {
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return [
-            appbar(Text("InstaLayout"),
+            appbar(const Text("InstaLayout"),
                 action: GestureDetector(
                     onTap: () {
                       Get.to(() => const MessagesScreen());
@@ -48,33 +47,6 @@ class MyHomePage extends GetView<HomeController> {
         ),
       ),
     );
-    // Scaffold(
-    //   appBar: appbar(
-    //     Text("InstaLayout"),
-    //     action: GestureDetector(
-    //         onTap: () {
-    //           Get.to(() => const MessagesScreen());
-    //         },
-    //         child: Image.asset(
-    //           Constants.message,
-    //           scale: 2.5.h,
-    //           color: isDarkMode(),
-    //         )),
-    //   ),
-    //   body: SingleChildScrollView(
-    //     child: Column(
-    //       mainAxisAlignment: MainAxisAlignment.center,
-    //       mainAxisSize: MainAxisSize.min,
-    //       children: <Widget>[
-    //         stories(context),
-    //         Divider(
-    //           height: 0.h,
-    //         ),
-    //         posts()
-    //       ],
-    //     ),
-    //   ),
-    // );
   }
 
   Widget stories(BuildContext context) {
@@ -95,7 +67,7 @@ class MyHomePage extends GetView<HomeController> {
   Widget posts() {
     return ListView.builder(
       itemBuilder: (context, index) {
-        return postWidget(index);
+        return postWidget(index, false);
       },
       itemCount: 10,
       scrollDirection: Axis.vertical,
@@ -145,87 +117,6 @@ class MyHomePage extends GetView<HomeController> {
           )
         ],
       ),
-    );
-  }
-
-  Widget postWidget(int index) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: EdgeInsets.fromLTRB(8.0.w, 4.0.h, 8.0.w, 4.0.h),
-          child: Row(
-            children: [
-              Stack(children: [
-                circularBorder(28, 30),
-                Positioned(
-                    left: 2.w,
-                    top: 1.7.h,
-                    child: profileImage(13, controller.images[index])),
-              ]),
-              SizedBox(
-                width: 10.w,
-              ),
-              Expanded(
-                  child: Text(
-                "UserName $index",
-                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14.sp),
-              )),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.more_vert),
-                padding: EdgeInsets.zero,
-                alignment: Alignment.centerRight,
-              )
-            ],
-          ),
-        ),
-        GestureDetector(
-            onDoubleTap: () {
-              controller.like.toggle();
-            },
-            child: Image.asset(
-              Constants.postImage,
-              scale: 0.7.h,
-              // fit: BoxFit.fill,
-            )),
-        Padding(
-            padding: EdgeInsets.fromLTRB(12.0.w, 8.0.h, 12.0.w, 8.0.h),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                iconButtons(),
-                SizedBox(
-                  height: 6.h,
-                ),
-                const Text(
-                  '197 likes',
-                  style: TextStyle(fontWeight: FontWeight.w800),
-                ),
-                SizedBox(
-                  height: 6.h,
-                ),
-                GestureDetector(
-                    onTap: () {
-                      Get.to(() => const CommentsScreen());
-                    },
-                    child: const Text('View all comments')),
-                SizedBox(
-                  height: 8.h,
-                ),
-                addcomment(controller.images[index]),
-                SizedBox(
-                  height: 8.h,
-                ),
-                Text(
-                  "1 hour ago",
-                  style: TextStyle(fontSize: 10.sp),
-                )
-              ],
-            ))
-      ],
     );
   }
 }

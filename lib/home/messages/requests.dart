@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:insta_layout/home/components.dart';
+import 'package:insta_layout/others/components.dart';
 import 'package:insta_layout/others/constants.dart';
 
 class RequestsScreen extends StatelessWidget {
@@ -9,7 +9,7 @@ class RequestsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appbar(Text("Message requests")),
+      appBar: appbar(const Text("Message requests")),
       body: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -50,12 +50,12 @@ class RequestsScreen extends StatelessWidget {
                       "Hidden Requests",
                       style: TextStyle(fontSize: 16.sp),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Text("0",
                         style: TextStyle(color: Colors.grey, fontSize: 14.sp))
                   ],
                 ),
-                trailing: Icon(Icons.keyboard_arrow_right)),
+                trailing: const Icon(Icons.keyboard_arrow_right)),
             SizedBox(
               height: 80.h,
             ),

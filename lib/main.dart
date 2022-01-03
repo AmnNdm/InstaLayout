@@ -12,8 +12,6 @@ import 'package:insta_layout/search/explore.dart';
 import 'package:insta_layout/search/explorevideos.dart';
 import 'package:insta_layout/search/search.dart';
 import 'package:insta_layout/search/searchcontent.dart';
-import 'package:insta_layout/splash.dart';
-import 'home/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -63,14 +61,14 @@ class MyApp extends StatelessWidget {
         darkTheme: ThemeData(
             brightness: Brightness.dark,
             primarySwatch: black,
-            primaryColor: Colors.black26,
+            // primaryColor: Colors.black26,
             scaffoldBackgroundColor: Colors.black,
             backgroundColor: Colors.black,
             canvasColor: Colors.black),
         theme: ThemeData(
             brightness: Brightness.light,
             primarySwatch: white,
-            primaryColor: Colors.white,
+            // primaryColor: Colors.white,
             scaffoldBackgroundColor: Colors.white,
             backgroundColor: Colors.white,
             canvasColor: Colors.white),
@@ -79,13 +77,13 @@ class MyApp extends StatelessWidget {
         initialRoute: "/",
         routes: {
           "/search": (context) => SearchScreen(),
-          "/post": (context) => PostScreen(),
-          "/activity": (context) => ActivityScreen(),
-          "/profile": (context) => ProfileScreen(),
-          "/message": (context) => MessagesScreen(),
-          "/searchcontent": (context) => SearchContent(),
-          "/explorevideos": (context) => ExploreVideos(),
-          "/explore": (context) => Explore()
+          "/post": (context) => const PostScreen(),
+          "/activity": (context) => const ActivityScreen(),
+          "/profile": (context) => const ProfileScreen(),
+          "/message": (context) => const MessagesScreen(),
+          "/searchcontent": (context) => const SearchContent(),
+          "/explorevideos": (context) => const Suggestion(),
+          "/explore": (context) => const Explore()
         },
       ),
     );

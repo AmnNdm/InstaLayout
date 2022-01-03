@@ -1,0 +1,310 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables
+
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:insta_layout/home/comments.dart';
+import 'package:insta_layout/home/controller/homecontroller.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'constants.dart';
+
+Color isDarkMode() {
+  if (MediaQuery.of(Get.context!).platformBrightness == Brightness.dark) {
+    return Colors.white;
+  } else {
+    return Colors.black;
+  }
+}
+
+EdgeInsetsGeometry allPadding = EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 8.h);
+
+appbar(Widget title,
+    {bool bottom = false,
+    Widget? flexibleWidget,
+    Widget? action,
+    sliver = false}) {
+  return sliver
+      ? SliverAppBar(
+          floating: true,
+          pinned: true,
+          backgroundColor: (MediaQuery.of(Get.context!).platformBrightness ==
+                  Brightness.dark)
+              ? Colors.black
+              : Colors.white,
+          title: title,
+          elevation: 0.2,
+          actions: action != null ? [action] : null,
+        )
+      : AppBar(
+          backgroundColor: (MediaQuery.of(Get.context!).platformBrightness ==
+                  Brightness.dark)
+              ? Colors.black
+              : Colors.white,
+          elevation: 0.0,
+          title: title,
+          actions: action != null ? [action] : null,
+          bottom: bottom
+              ? PreferredSize(
+                  child: flexibleWidget!,
+                  preferredSize: Size.fromHeight(
+                      MediaQuery.of(Get.context!).size.height / 16))
+              : null,
+        );
+}
+
+Widget profileImage(double r, String image) {
+  return CircleAvatar(
+    radius: r.r,
+    foregroundImage: AssetImage(
+      image,
+    ),
+  );
+}
+
+Widget circularBorder(double h, double w) {
+  return Container(
+    height: h.h,
+    width: w.w,
+    decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(100.r),
+        border: Border.all(width: 2.w, color: Colors.indigo)),
+  );
+}
+
+Widget searchBar(
+    {required Widget page, bool? withNavbar, required BuildContext context}) {
+  return TextField(
+    decoration: InputDecoration(
+      isDense: true,
+      contentPadding: EdgeInsets.zero,
+      hintText: "Search",
+      hintStyle: TextStyle(fontSize: 16.sp),
+      // focusColor: isDarkMode(),
+      prefixIcon: Icon(
+        Icons.search_outlined,
+        color: Colors.grey.shade600,
+      ),
+      border: OutlineInputBorder(
+          gapPadding: 0,
+          borderRadius: BorderRadius.circular(8.r),
+          borderSide: BorderSide.none),
+      filled: true,
+    ),
+    readOnly: true,
+    onTap: () {
+      pushNewScreen(context, screen: page, withNavBar: withNavbar);
+      // Get.to(() => page);
+    },
+  );
+}
+
+Widget callWidget(int index, String image, String username,
+    {bool trailing = false, bool cross = false}) {
+  return ListTile(
+    leading: profileImage(28, image),
+    title: Text("Username $index"),
+    subtitle: Text(username),
+    trailing: trailing
+        ? SizedBox(
+            width: 60.w,
+            child: Row(
+              children: [
+                Icon(
+                  Icons.call_outlined,
+                  color: isDarkMode(),
+                  size: 22.h,
+                ),
+                const Spacer(),
+                Icon(
+                  Icons.video_call_outlined,
+                  color: isDarkMode(),
+                  size: 28.h,
+                )
+              ],
+            ),
+          )
+        : cross
+            ? Icon(
+                Icons.close,
+                size: 20.h,
+              )
+            : null,
+    contentPadding: EdgeInsets.fromLTRB(8.w, 0.0, 10.w, 0.0),
+  );
+}
+
+Widget postWidget(int index, bool follow) {
+  HomeController controller = Get.find<HomeController>();
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.start,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Padding(
+        padding: EdgeInsets.fromLTRB(8.0.w, 4.0.h, 8.0.w, 4.0.h),
+        child: Row(
+          children: [
+            Stack(children: [
+              circularBorder(28, 30),
+              Positioned(
+                  left: 2.w,
+                  top: 1.7.h,
+                  child: profileImage(13, controller.images[index])),
+            ]),
+            SizedBox(
+              width: 10.w,
+            ),
+            Expanded(
+                child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    "UserName $index",
+                    style:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 14.sp),
+                  ),
+                ),
+                Visibility(
+                    visible: follow,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      child: Text(
+                        "Follow",
+                        style: TextStyle(color: Colors.white, fontSize: 12.sp),
+                      ),
+                      style: ButtonStyle(
+                        visualDensity: VisualDensity.compact,
+                        padding: MaterialStateProperty.all<EdgeInsets>(
+                            EdgeInsets.zero),
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.blue),
+                      ),
+                    ))
+              ],
+            )),
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.more_vert),
+              padding: EdgeInsets.zero,
+              alignment: Alignment.centerRight,
+            )
+          ],
+        ),
+      ),
+      GestureDetector(
+          onDoubleTap: () {
+            controller.like.toggle();
+          },
+          child: Image.asset(
+            Constants.postImage,
+            scale: 0.7.h,
+            // fit: BoxFit.fill,
+          )),
+      Padding(
+          padding: EdgeInsets.fromLTRB(12.0.w, 8.0.h, 12.0.w, 8.0.h),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              iconButtons(),
+              SizedBox(
+                height: 6.h,
+              ),
+              const Text(
+                '197 likes',
+                style: TextStyle(fontWeight: FontWeight.w800),
+              ),
+              SizedBox(
+                height: 6.h,
+              ),
+              GestureDetector(
+                  onTap: () {
+                    Get.to(() => const CommentsScreen());
+                  },
+                  child: const Text('View all comments')),
+              SizedBox(
+                height: 8.h,
+              ),
+              addcomment(controller.images[index]),
+              SizedBox(
+                height: 8.h,
+              ),
+              Text(
+                "1 hour ago",
+                style: TextStyle(fontSize: 10.sp),
+              )
+            ],
+          ))
+    ],
+  );
+}
+
+Widget iconButtons() {
+  return Row(
+    children: [
+      ObxValue((RxBool rxBool) {
+        return GestureDetector(
+            onTap: () {
+              rxBool.value = !rxBool.value;
+            },
+            child: rxBool.value
+                ? Image.asset(
+                    Constants.likeFilled,
+                    scale: 6.3.h,
+                    filterQuality: FilterQuality.high,
+                  )
+                : Image.asset(
+                    Constants.like,
+                    scale: 6.h,
+                    color: isDarkMode(),
+                    filterQuality: FilterQuality.high,
+                  ));
+      }, Get.find<HomeController>().like),
+      SizedBox(
+        width: 14.w,
+      ),
+      GestureDetector(
+          onTap: () {},
+          child: Image.asset(
+            Constants.comment,
+            scale: 6.h,
+            color: isDarkMode(),
+          )),
+      SizedBox(
+        width: 12.w,
+      ),
+      GestureDetector(
+          onTap: () {},
+          child: Image.asset(
+            Constants.send,
+            scale: 6.5.h,
+            color: isDarkMode(),
+          )),
+      const Spacer(),
+      GestureDetector(
+          onTap: () {},
+          child: Image.asset(
+            Constants.save,
+            scale: 6.h,
+            color: isDarkMode(),
+          )),
+    ],
+  );
+}
+
+Widget addcomment(String image) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.start,
+    children: [
+      profileImage(15, image),
+      SizedBox(
+        width: 10.w,
+      ),
+      Expanded(
+          child: TextField(
+        decoration: InputDecoration.collapsed(
+            hintText: "Add a comment...",
+            hintStyle: TextStyle(fontSize: 14.sp)),
+      ))
+    ],
+  );
+}

@@ -1,10 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:insta_layout/home/components.dart';
+import 'package:get/get.dart';
+import 'package:insta_layout/others/components.dart';
+import 'package:insta_layout/search/explore.dart';
+import 'package:insta_layout/search/explorevideos.dart';
 import 'package:insta_layout/search/searchcontent.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:insta_layout/search/searchcontroller.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 // List<StaggeredGridTile> _staggeredTiles = const <StaggeredGridTile>[
 //   StaggeredGridTile.count(crossAxisCellCount: 2, mainAxisCellCount: 2, child: _Example01Tile(Colors.green, Icons.widgets)),
@@ -34,66 +36,96 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 //   const _Example01Tile(Colors.blue, Icons.radio),
 // ];
 
-class SearchScreen extends StatelessWidget {
-  const SearchScreen({Key? key}) : super(key: key);
+class SearchScreen extends GetView<SearchController> {
+  SearchScreen({Key? key}) : super(key: key) {
+    Get.put(SearchController());
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: NestedScrollView(
-      headerSliverBuilder: (context, innerBoxIsScrolled) => [
-        appbar(
-            searchBar(
-                page: SearchContent(), withNavbar: true, context: context),
-            sliver: true)
-      ],
-      body: SingleChildScrollView(
-        child: StaggeredGrid.count(
-          crossAxisCount: 4,
-          mainAxisSpacing: 4,
-          crossAxisSpacing: 4,
-          children: const [
-            StaggeredGridTile.count(
-              crossAxisCellCount: 1,
-              mainAxisCellCount: 1,
-              child: Tile(index: 0),
-            ),
-            StaggeredGridTile.count(
-              crossAxisCellCount: 1,
-              mainAxisCellCount: 1,
-              child: Tile(index: 1),
-            ),
-            StaggeredGridTile.count(
-              crossAxisCellCount: 2,
-              mainAxisCellCount: 2,
-              child: Tile(index: 4),
-            ),
-            StaggeredGridTile.count(
-              crossAxisCellCount: 1,
-              mainAxisCellCount: 1,
-              child: Tile(index: 2),
-            ),
-            StaggeredGridTile.count(
-              crossAxisCellCount: 1,
-              mainAxisCellCount: 1,
-              child: Tile(index: 3),
-            ),
-          ],
-        ),
+            headerSliverBuilder: (context, innerBoxIsScrolled) => [
+                  appbar(
+                      searchBar(
+                          page: const SearchContent(),
+                          withNavbar: true,
+                          context: context),
+                      sliver: true)
+                ],
+            body:
+                // SingleChildScrollView(
+                //   child: Column(
+                //     children: [
+                //       tiles(controller.left.toggle().value),
+                //       tiles(controller.left.toggle().value)
+                //     ],
+                //   ),
+                // )
+                ListView.builder(
+                    padding: EdgeInsets.zero,
+                    itemCount: 2,
+                    itemBuilder: (context, index) {
+                      return tiles(controller.left.toggle().value, context);
+                    })));
+  }
+
+  tiles(bool left, BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 3.0),
+      child: StaggeredGrid.count(
+        crossAxisCount: 3,
+        mainAxisSpacing: 3,
+        crossAxisSpacing: 3,
+        children: [
+          left ? suggestionTile("S", context) : exploreTile("E", context),
+          left ? exploreTile("E", context) : suggestionTile("S", context),
+          exploreTile("E", context),
+          exploreTile("E", context),
+          exploreTile("E", context),
+          exploreTile("E", context),
+          exploreTile("E", context),
+          exploreTile("E", context),
+          exploreTile("E", context),
+        ],
       ),
-    ));
+    );
+  }
+
+  exploreTile(String type, BuildContext context) {
+    return StaggeredGridTile.count(
+        crossAxisCellCount: 1,
+        mainAxisCellCount: 1,
+        child: GestureDetector(
+            onTap: () {
+              pushNewScreen(context, screen: Explore(), withNavBar: true);
+            },
+            child: Tile(
+              type: type,
+            )));
+  }
+
+  suggestionTile(String type, BuildContext context) {
+    return StaggeredGridTile.count(
+      crossAxisCellCount: 2,
+      mainAxisCellCount: 2,
+      child: GestureDetector(
+          onTap: () =>
+              pushNewScreen(context, screen: Suggestion(), withNavBar: true),
+          child: Tile(type: type)),
+    );
   }
 }
 
 class Tile extends StatelessWidget {
   const Tile({
     Key? key,
-    required this.index,
+    required this.type,
     this.extent,
     this.bottomSpace,
   }) : super(key: key);
 
-  final int index;
+  final String type;
   final double? extent;
   final double? bottomSpace;
 
@@ -108,22 +140,14 @@ class Tile extends StatelessWidget {
           maxRadius: 20,
           backgroundColor: Colors.white,
           foregroundColor: Colors.black,
-          child: Text('$index', style: const TextStyle(fontSize: 20)),
+          child: Text(type, style: const TextStyle(fontSize: 20)),
         ),
       ),
     );
 
-    if (bottomSpace == null) {
-      return child;
-    }
-
     return Column(
       children: [
         Expanded(child: child),
-        Container(
-          height: bottomSpace,
-          color: Colors.green,
-        )
       ],
     );
   }

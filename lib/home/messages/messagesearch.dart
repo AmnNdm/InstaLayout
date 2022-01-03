@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:insta_layout/home/components.dart';
-import '../homecontroller.dart';
+import 'package:insta_layout/others/components.dart';
+import '../controller/homecontroller.dart';
 
 class MessageSearchScreen extends GetView<HomeController> {
   const MessageSearchScreen({Key? key}) : super(key: key);

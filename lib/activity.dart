@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:insta_layout/home/components.dart';
+import 'package:insta_layout/others/components.dart';
 
 class ActivityScreen extends StatelessWidget {
   const ActivityScreen({Key? key}) : super(key: key);
@@ -9,7 +9,7 @@ class ActivityScreen extends StatelessWidget {
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return [appbar(Text("Activity"), sliver: true)];
+          return [appbar(const Text("Activity"), sliver: true)];
         },
         body: SingleChildScrollView(
           child: Column(),

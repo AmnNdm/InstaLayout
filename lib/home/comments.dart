@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:insta_layout/home/homecontroller.dart';
-import 'package:insta_layout/home/components.dart';
+import 'package:insta_layout/home/controller/homecontroller.dart';
+import 'package:insta_layout/others/components.dart';
 import 'package:insta_layout/others/constants.dart';
 
 class CommentsScreen extends GetView<HomeController> {
@@ -11,7 +11,7 @@ class CommentsScreen extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appbar(
-        Text("Comments"),
+        const Text("Comments"),
         action: GestureDetector(
           onTap: () {},
           child: Image.asset(

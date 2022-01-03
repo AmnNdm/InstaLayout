@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:insta_layout/home/components.dart';
+import 'package:insta_layout/others/components.dart';
 
 class SearchContent extends StatelessWidget {
+  const SearchContent({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -5,17 +5,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:insta_layout/home/messages/messagesearch.dart';
 import 'package:insta_layout/home/messages/requests.dart';
-import 'package:insta_layout/home/components.dart';
+import 'package:insta_layout/others/components.dart';
 import 'package:insta_layout/others/constants.dart';
 
-import '../homecontroller.dart';
+import '../controller/homecontroller.dart';
 
 class MessagesScreen extends GetView<HomeController> {
   const MessagesScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: appbar(Text("username"),
+        appBar: appbar(const Text("username"),
             action: Padding(
               padding: EdgeInsets.only(right: 10.0.w),
               child: Row(
@@ -54,21 +54,21 @@ class MessagesScreen extends GetView<HomeController> {
           return GestureDetector(
             onTap: () => rxInt.value = 1,
             child: rxInt.value == 1
-                ? activeButton(context, "Chats", true)
-                : activeButton(context, "Chats", false),
+                ? tabButton(context, "Chats", true)
+                : tabButton(context, "Chats", false),
           );
         }, controller.currentTab),
         ObxValue((RxInt rxInt) {
           return GestureDetector(
             onTap: () => rxInt.value = 2,
             child: rxInt.value == 2
-                ? activeButton(context, "Calls", true)
-                : activeButton(context, "Calls", false),
+                ? tabButton(context, "Calls", true)
+                : tabButton(context, "Calls", false),
           );
         }, controller.currentTab),
         GestureDetector(
           onTap: () => Get.to(() => const RequestsScreen()),
-          child: activeButton(context, "Requests", false),
+          child: tabButton(context, "Requests", false),
         )
       ],
     );
@@ -80,7 +80,7 @@ class MessagesScreen extends GetView<HomeController> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          searchBar(page: MessageSearchScreen(), context: context),
+          searchBar(page: const MessageSearchScreen(), context: context),
           SizedBox(
             height: 10.h,
           ),
@@ -110,6 +110,7 @@ class MessagesScreen extends GetView<HomeController> {
             child: Text("Watch together",
                 style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600)),
           ),
+          // ignore: sized_box_for_whitespace
           Container(
             height: MediaQuery.of(context).size.height / 4,
             child: ListView.builder(
@@ -146,5 +147,44 @@ class MessagesScreen extends GetView<HomeController> {
                         controller.images[index].toString());
                   }))
         ]);
+  }
+
+  tabButton(BuildContext context, String title, bool isactive) {
+    return Container(
+      height: 50.h,
+      width: 120.w,
+      child: Center(
+          child: isactive
+              ? Text(
+                  title,
+                  style: const TextStyle(fontWeight: FontWeight.w600),
+                )
+              : Text(
+                  title,
+                  style: const TextStyle(
+                      color: Colors.grey, fontWeight: FontWeight.w600),
+                )),
+      decoration: isactive
+          ? BoxDecoration(
+              border:
+                  Border(bottom: BorderSide(color: isDarkMode(), width: 2.w)))
+          : BoxDecoration(
+              border: Border(
+                  bottom:
+                      BorderSide(color: Colors.grey.shade400, width: 0.5.w))),
+    );
+  }
+
+  Widget chatWidget(int index, String image, String message) {
+    return ListTile(
+      leading: profileImage(28, image),
+      title: Text("Username $index"),
+      subtitle: Text(message),
+      trailing: const Icon(
+        Icons.camera_enhance_outlined,
+        color: Colors.grey,
+      ),
+      contentPadding: EdgeInsets.zero,
+    );
   }
 }
