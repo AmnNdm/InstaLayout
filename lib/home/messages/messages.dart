@@ -102,11 +102,6 @@ class MessagesScreen extends GetView<HomeController> {
                     color: Colors.grey,
                   ),
                 );
-                // cncWidget(index, controller.images[index],
-                //     content: controller.messages[index],
-                //     subtitle: true,
-                //     trailing: true,
-                //     chat: true);
               }),
         )
       ],
@@ -178,11 +173,6 @@ class MessagesScreen extends GetView<HomeController> {
                             ],
                           ),
                         ));
-                    // cncWidget(index, controller.images[index],
-                    //     content: controller.images[index].toString(),
-                    //     subtitle: true,
-                    //     trailing: true,
-                    //     call: true);
                   }))
         ]);
   }
@@ -212,17 +202,4 @@ class MessagesScreen extends GetView<HomeController> {
                       BorderSide(color: Colors.grey.shade400, width: 0.5.w))),
     );
   }
-
-  // Widget chatWidget(int index, String image, String message) {
-  //   return ListTile(
-  //     leading: profileImage(28, image),
-  //     title: Text("Username $index"),
-  //     subtitle: Text(message),
-  //     trailing: const Icon(
-  //       Icons.camera_enhance_outlined,
-  //       color: Colors.grey,
-  //     ),
-  //     contentPadding: EdgeInsets.zero,
-  //   );
-  // }
 }

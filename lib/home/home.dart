@@ -5,10 +5,11 @@ import 'package:insta_layout/others/constants.dart';
 import 'package:insta_layout/home/controller/homecontroller.dart';
 import 'package:insta_layout/home/messages/messages.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:insta_layout/others/post.dart';
 
 class MyHomePage extends GetView<HomeController> {
   final bool hideStatus;
-  MyHomePage({Key? key, this.hideStatus = false}) : super(key: key);
+  const MyHomePage({Key? key, this.hideStatus = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +66,25 @@ class MyHomePage extends GetView<HomeController> {
   Widget posts() {
     return ListView.builder(
       itemBuilder: (context, index) {
-        return postWidget(index, false);
+        return PostWidget(
+          username: "Username $index",
+          userimage: controller.images[index],
+          postimage: Constants.postImage,
+          time: "1 hour ago",
+          like: controller.like,
+          bottomsheet: () {
+            Get.bottomSheet(postBottomSheet(),
+                barrierColor: Colors.black45,
+                backgroundColor:
+                    MediaQuery.of(context).platformBrightness == Brightness.dark
+                        ? Colors.grey.shade900
+                        : Colors.white,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(15.r),
+                        topRight: Radius.circular(15.r))));
+          },
+        );
       },
       itemCount: 10,
       scrollDirection: Axis.vertical,
@@ -114,6 +133,16 @@ class MyHomePage extends GetView<HomeController> {
             style: TextStyle(fontSize: 12.sp),
           )
         ],
+      ),
+    );
+  }
+
+  Widget postBottomSheet() {
+    return Container(
+      height: 250.h,
+      padding: EdgeInsets.fromLTRB(8.w, 8.h, 8.w, 10.h),
+      child: Column(
+        children: [],
       ),
     );
   }

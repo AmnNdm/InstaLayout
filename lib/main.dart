@@ -10,7 +10,7 @@ import 'package:insta_layout/others/customnavigationbar.dart';
 import 'package:insta_layout/post.dart';
 import 'package:insta_layout/profile.dart';
 import 'package:insta_layout/search/explore.dart';
-import 'package:insta_layout/search/explorevideos.dart';
+import 'package:insta_layout/search/suggestions.dart';
 import 'package:insta_layout/search/search.dart';
 import 'package:insta_layout/search/searchcontent.dart';
 
@@ -77,7 +77,7 @@ class MyApp extends StatelessWidget {
         // const SplashScreen(),
         initialRoute: "/",
         routes: {
-          "/search": (context) => SearchScreen(),
+          "/search": (context) => const SearchScreen(),
           "/post": (context) => const PostScreen(),
           "/activity": (context) => const ActivityScreen(),
           "/profile": (context) => const ProfileScreen(),

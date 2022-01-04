@@ -5,14 +5,15 @@ import 'components.dart';
 
 class CNCWidget extends StatelessWidget {
   // int index;
-  String title;
-  String userImage, content, time;
-  Widget? trailing;
-  Widget? leading;
-  bool isNotification = false;
+  final String title;
+  final String userImage, content, time;
+  final Widget? trailing;
+  final Widget? leading;
+  final bool isNotification;
+  final Function()? ontap;
   // String? notificationImage;
 
-  CNCWidget(
+  const CNCWidget(
       {Key? key,
       // required this.index,
       required this.userImage,
@@ -21,7 +22,8 @@ class CNCWidget extends StatelessWidget {
       this.time = "",
       this.isNotification = false,
       this.trailing,
-      this.leading})
+      this.leading,
+      this.ontap})
       : super(key: key);
 
   @override
@@ -40,7 +42,7 @@ class CNCWidget extends StatelessWidget {
                         ? " requested to follow you. "
                         : " $content ",
                     style: TextStyle(color: isDarkMode())),
-                TextSpan(text: time, style: TextStyle(color: Colors.grey))
+                TextSpan(text: time, style: const TextStyle(color: Colors.grey))
               ]),
             )
           : Text(title,

@@ -71,10 +71,10 @@ class BottomBarState extends State<CustomBottomBar> {
   }
 
   final List<Widget> screens = [
-    MyHomePage(
+    const MyHomePage(
       hideStatus: false,
     ),
-    SearchScreen(),
+    const SearchScreen(),
     const PostScreen(),
     const ActivityScreen(),
     const ProfileScreen()

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:insta_layout/others/components.dart';
 import 'package:insta_layout/search/explore.dart';
-import 'package:insta_layout/search/explorevideos.dart';
+import 'package:insta_layout/search/suggestions.dart';
 import 'package:insta_layout/search/searchcontent.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:insta_layout/search/searchcontroller.dart';
+import 'package:insta_layout/search/controller/searchcontroller.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class SearchScreen extends GetView<SearchController> {
-  SearchScreen({Key? key}) : super(key: key);
+  const SearchScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

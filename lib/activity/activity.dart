@@ -33,12 +33,12 @@ class ActivityScreen extends GetView<ActivityController> {
                 trailing: Image.asset(Constants.imagenotification),
                 isNotification: true,
                 content: " liked your image. ",
-                time: "2h",
+                time: "1s",
               ),
               CNCWidget(
                 userImage: Constants.userM,
                 title: Constants.userM.toString(),
-                time: "21h",
+                time: "23h",
                 trailing: SizedBox(
                   width: 150.w,
                   child: Row(
@@ -54,9 +54,113 @@ class ActivityScreen extends GetView<ActivityController> {
                 isNotification: true,
               ),
               title("Yesterday"),
+              CNCWidget(
+                userImage: Constants.userF,
+                title: Constants.userF.toString(),
+                trailing: Image.asset(Constants.imagenotification),
+                isNotification: true,
+                content: " liked your image. ",
+                time: "24h",
+              ),
+              CNCWidget(
+                userImage: Constants.userM,
+                title: Constants.userM.toString(),
+                time: "1d",
+                trailing: SizedBox(
+                  width: 150.w,
+                  child: Row(
+                    children: [
+                      button(title: "Confirm", color: Colors.blue),
+                      SizedBox(
+                        width: 5.w,
+                      ),
+                      button(title: "Delete", color: Colors.white)
+                    ],
+                  ),
+                ),
+                isNotification: true,
+              ),
               title("This Week"),
+              CNCWidget(
+                userImage: Constants.userF,
+                title: Constants.userF.toString(),
+                trailing: Image.asset(Constants.imagenotification),
+                isNotification: true,
+                content: " liked your image. ",
+                time: "2d",
+              ),
+              CNCWidget(
+                userImage: Constants.userM,
+                title: Constants.userM.toString(),
+                time: "5d",
+                trailing: SizedBox(
+                  width: 150.w,
+                  child: Row(
+                    children: [
+                      button(title: "Confirm", color: Colors.blue),
+                      SizedBox(
+                        width: 5.w,
+                      ),
+                      button(title: "Delete", color: Colors.white)
+                    ],
+                  ),
+                ),
+                isNotification: true,
+              ),
               title("This Month"),
+              CNCWidget(
+                userImage: Constants.userF,
+                title: Constants.userF.toString(),
+                trailing: Image.asset(Constants.imagenotification),
+                isNotification: true,
+                content: " liked your image. ",
+                time: "7d",
+              ),
+              CNCWidget(
+                userImage: Constants.userM,
+                title: Constants.userM.toString(),
+                time: "4w",
+                trailing: SizedBox(
+                  width: 150.w,
+                  child: Row(
+                    children: [
+                      button(title: "Confirm", color: Colors.blue),
+                      SizedBox(
+                        width: 5.w,
+                      ),
+                      button(title: "Delete", color: Colors.white)
+                    ],
+                  ),
+                ),
+                isNotification: true,
+              ),
               title("Earlier"),
+              CNCWidget(
+                userImage: Constants.userF,
+                title: Constants.userF.toString(),
+                trailing: Image.asset(Constants.imagenotification),
+                isNotification: true,
+                content: " liked your image. ",
+                time: "5w",
+              ),
+              CNCWidget(
+                userImage: Constants.userM,
+                title: Constants.userM.toString(),
+                time: "9w",
+                trailing: SizedBox(
+                  width: 150.w,
+                  child: Row(
+                    children: [
+                      button(title: "Confirm", color: Colors.blue),
+                      SizedBox(
+                        width: 5.w,
+                      ),
+                      button(title: "Delete", color: Colors.white)
+                    ],
+                  ),
+                ),
+                isNotification: true,
+              ),
             ],
           ),
         ),

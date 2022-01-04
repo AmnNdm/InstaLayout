@@ -3,10 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:insta_layout/home/comments.dart';
-import 'package:insta_layout/home/controller/homecontroller.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import 'constants.dart';
 
 Color isDarkMode() {
   if (MediaQuery.of(Get.context!).platformBrightness == Brightness.dark) {
@@ -123,7 +120,7 @@ Widget cncWidget(int index, String image,
                   text:
                       request ? " requested to follow you. " : " ${content!} ",
                   style: TextStyle(color: isDarkMode())),
-              TextSpan(text: time, style: TextStyle(color: Colors.grey))
+              TextSpan(text: time, style: const TextStyle(color: Colors.grey))
             ]),
           )
         : Text("Username $index"),
@@ -177,168 +174,97 @@ Widget cncWidget(int index, String image,
   );
 }
 
-Widget postWidget(int index, bool follow) {
-  HomeController controller = Get.find<HomeController>();
-  return Column(
-    mainAxisAlignment: MainAxisAlignment.start,
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Padding(
-        padding: EdgeInsets.fromLTRB(8.0.w, 4.0.h, 8.0.w, 4.0.h),
-        child: Row(
-          children: [
-            Stack(children: [
-              circularBorder(28, 30),
-              Positioned(
-                  left: 2.w,
-                  top: 1.7.h,
-                  child: profileImage(13, controller.images[index])),
-            ]),
-            SizedBox(
-              width: 10.w,
-            ),
-            Expanded(
-                child: Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    "UserName $index",
-                    style:
-                        TextStyle(fontWeight: FontWeight.w600, fontSize: 14.sp),
-                  ),
-                ),
-                Visibility(
-                    visible: follow,
-                    child: button(title: "Follow", color: Colors.blue))
-              ],
-            )),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.more_vert),
-              padding: EdgeInsets.zero,
-              alignment: Alignment.centerRight,
-            )
-          ],
-        ),
-      ),
-      GestureDetector(
-          onDoubleTap: () {
-            controller.like.toggle();
-          },
-          child: Image.asset(
-            Constants.postImage,
-            scale: 0.7.h,
-            // fit: BoxFit.fill,
-          )),
-      Padding(
-          padding: EdgeInsets.fromLTRB(12.0.w, 8.0.h, 12.0.w, 8.0.h),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              iconButtons(),
-              SizedBox(
-                height: 6.h,
-              ),
-              const Text(
-                '197 likes',
-                style: TextStyle(fontWeight: FontWeight.w800),
-              ),
-              SizedBox(
-                height: 6.h,
-              ),
-              GestureDetector(
-                  onTap: () {
-                    Get.to(() => const CommentsScreen());
-                  },
-                  child: const Text('View all comments')),
-              SizedBox(
-                height: 8.h,
-              ),
-              addcomment(controller.images[index]),
-              SizedBox(
-                height: 8.h,
-              ),
-              Text(
-                "1 hour ago",
-                style: TextStyle(fontSize: 10.sp),
-              )
-            ],
-          ))
-    ],
-  );
-}
-
-Widget iconButtons() {
-  return Row(
-    children: [
-      ObxValue((RxBool rxBool) {
-        return GestureDetector(
-            onTap: () {
-              rxBool.value = !rxBool.value;
-            },
-            child: rxBool.value
-                ? Image.asset(
-                    Constants.likeFilled,
-                    scale: 6.3.h,
-                    filterQuality: FilterQuality.high,
-                  )
-                : Image.asset(
-                    Constants.like,
-                    scale: 6.h,
-                    color: isDarkMode(),
-                    filterQuality: FilterQuality.high,
-                  ));
-      }, Get.find<HomeController>().like),
-      SizedBox(
-        width: 14.w,
-      ),
-      GestureDetector(
-          onTap: () {},
-          child: Image.asset(
-            Constants.comment,
-            scale: 6.h,
-            color: isDarkMode(),
-          )),
-      SizedBox(
-        width: 12.w,
-      ),
-      GestureDetector(
-          onTap: () {},
-          child: Image.asset(
-            Constants.send,
-            scale: 6.5.h,
-            color: isDarkMode(),
-          )),
-      const Spacer(),
-      GestureDetector(
-          onTap: () {},
-          child: Image.asset(
-            Constants.save,
-            scale: 6.h,
-            color: isDarkMode(),
-          )),
-    ],
-  );
-}
-
-Widget addcomment(String image) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.start,
-    children: [
-      profileImage(15, image),
-      SizedBox(
-        width: 10.w,
-      ),
-      Expanded(
-          child: TextField(
-        decoration: InputDecoration.collapsed(
-            hintText: "Add a comment...",
-            hintStyle: TextStyle(fontSize: 14.sp)),
-      ))
-    ],
-  );
-}
+// Widget postWidget(int index, bool follow) {
+//   HomeController controller = Get.find<HomeController>();
+//   return Column(
+//     mainAxisAlignment: MainAxisAlignment.start,
+//     crossAxisAlignment: CrossAxisAlignment.start,
+//     children: [
+//       Padding(
+//         padding: EdgeInsets.fromLTRB(8.0.w, 4.0.h, 8.0.w, 4.0.h),
+//         child: Row(
+//           children: [
+//             Stack(children: [
+//               circularBorder(28, 30),
+//               Positioned(
+//                   left: 2.w,
+//                   top: 1.7.h,
+//                   child: profileImage(13, controller.images[index])),
+//             ]),
+//             SizedBox(
+//               width: 10.w,
+//             ),
+//             Expanded(
+//                 child: Row(
+//               children: [
+//                 Expanded(
+//                   child: Text(
+//                     "UserName $index",
+//                     style:
+//                         TextStyle(fontWeight: FontWeight.w600, fontSize: 14.sp),
+//                   ),
+//                 ),
+//                 Visibility(
+//                     visible: follow,
+//                     child: button(title: "Follow", color: Colors.blue))
+//               ],
+//             )),
+//             IconButton(
+//               onPressed: () {},
+//               icon: const Icon(Icons.more_vert),
+//               padding: EdgeInsets.zero,
+//               alignment: Alignment.centerRight,
+//             )
+//           ],
+//         ),
+//       ),
+//       GestureDetector(
+//           onDoubleTap: () {
+//             controller.like.toggle();
+//           },
+//           child: Image.asset(
+//             Constants.postImage,
+//             scale: 0.7.h,
+//             // fit: BoxFit.fill,
+//           )),
+//       Padding(
+//           padding: EdgeInsets.fromLTRB(12.0.w, 8.0.h, 12.0.w, 8.0.h),
+//           child: Column(
+//             mainAxisAlignment: MainAxisAlignment.start,
+//             crossAxisAlignment: CrossAxisAlignment.start,
+//             children: [
+//               iconButtons(),
+//               SizedBox(
+//                 height: 6.h,
+//               ),
+//               const Text(
+//                 '197 likes',
+//                 style: TextStyle(fontWeight: FontWeight.w800),
+//               ),
+//               SizedBox(
+//                 height: 6.h,
+//               ),
+//               GestureDetector(
+//                   onTap: () {
+//                     Get.to(() => const CommentsScreen());
+//                   },
+//                   child: const Text('View all comments')),
+//               SizedBox(
+//                 height: 8.h,
+//               ),
+//               addcomment(controller.images[index]),
+//               SizedBox(
+//                 height: 8.h,
+//               ),
+//               Text(
+//                 "1 hour ago",
+//                 style: TextStyle(fontSize: 10.sp),
+//               )
+//             ],
+//           ))
+//     ],
+//   );
+// }
 
 Widget button({required String title, required Color color}) {
   return ElevatedButton(

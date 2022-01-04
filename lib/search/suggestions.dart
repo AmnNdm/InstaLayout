@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:insta_layout/others/components.dart';
+import 'package:insta_layout/others/post.dart';
+import 'package:insta_layout/search/controller/searchcontroller.dart';
 
-class Suggestion extends StatelessWidget {
+class Suggestion extends GetView<SearchController> {
   const Suggestion({Key? key}) : super(key: key);
 
   @override
@@ -13,7 +16,14 @@ class Suggestion extends StatelessWidget {
           },
           body: ListView.builder(
             itemBuilder: (context, index) {
-              return postWidget(index, true);
+              return PostWidget(
+                username: "username $index",
+                userimage: controller.images[index],
+                postimage: controller.postimages[index],
+                time: "1 day ago",
+                follow: true,
+                like: controller.like,
+              );
             },
             itemCount: 10,
             scrollDirection: Axis.vertical,

@@ -36,6 +36,14 @@ class HomeController extends GetxController {
   ];
 
   RxBool like = false.obs;
+  RxInt likes = 0.obs;
+  int onLikePressed() {
+    return (likes += 1).value;
+  }
+
+  int onLikeUnpressed() {
+    return (likes -= 1).value;
+  }
 
   RxInt currentTab = 1.obs;
 }

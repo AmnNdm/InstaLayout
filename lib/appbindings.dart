@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:insta_layout/activity/activitycontroller.dart';
 import 'package:insta_layout/home/controller/homecontroller.dart';
-import 'package:insta_layout/search/searchcontroller.dart';
+import 'package:insta_layout/search/controller/searchcontroller.dart';
 
 class AppBindings extends Bindings {
   @override
