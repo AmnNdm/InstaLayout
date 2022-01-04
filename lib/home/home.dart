@@ -8,9 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyHomePage extends GetView<HomeController> {
   final bool hideStatus;
-  MyHomePage({Key? key, this.hideStatus = false}) : super(key: key) {
-    Get.put(HomeController());
-  }
+  MyHomePage({Key? key, this.hideStatus = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -16,7 +16,15 @@ Color isDarkMode() {
   }
 }
 
-EdgeInsetsGeometry allPadding = EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 8.h);
+Color isnotDarkMode() {
+  if (MediaQuery.of(Get.context!).platformBrightness == Brightness.dark) {
+    return Colors.black;
+  } else {
+    return Colors.white;
+  }
+}
+
+EdgeInsetsGeometry allPadding = EdgeInsets.fromLTRB(16.w, 8.h, 12.w, 8.h);
 
 appbar(Widget title,
     {bool bottom = false,
@@ -27,19 +35,13 @@ appbar(Widget title,
       ? SliverAppBar(
           floating: true,
           pinned: true,
-          backgroundColor: (MediaQuery.of(Get.context!).platformBrightness ==
-                  Brightness.dark)
-              ? Colors.black
-              : Colors.white,
+          backgroundColor: isnotDarkMode(),
           title: title,
           elevation: 0.2,
           actions: action != null ? [action] : null,
         )
       : AppBar(
-          backgroundColor: (MediaQuery.of(Get.context!).platformBrightness ==
-                  Brightness.dark)
-              ? Colors.black
-              : Colors.white,
+          backgroundColor: isnotDarkMode(),
           elevation: 0.0,
           title: title,
           actions: action != null ? [action] : null,
@@ -98,37 +100,79 @@ Widget searchBar(
   );
 }
 
-Widget callWidget(int index, String image, String username,
-    {bool trailing = false, bool cross = false}) {
+Widget cncWidget(int index, String image,
+    {required bool subtitle,
+    String? content,
+    String? time,
+    bool trailing = false,
+    bool call = false,
+    bool chat = false,
+    bool notification = false,
+    String? notificationImage,
+    bool request = false}) {
   return ListTile(
     leading: profileImage(28, image),
-    title: Text("Username $index"),
-    subtitle: Text(username),
-    trailing: trailing
-        ? SizedBox(
-            width: 60.w,
-            child: Row(
-              children: [
-                Icon(
-                  Icons.call_outlined,
-                  color: isDarkMode(),
-                  size: 22.h,
-                ),
-                const Spacer(),
-                Icon(
-                  Icons.video_call_outlined,
-                  color: isDarkMode(),
-                  size: 28.h,
-                )
-              ],
-            ),
+    title: notification
+        ? RichText(
+            text: TextSpan(children: [
+              TextSpan(
+                  text: "Username $index",
+                  style: TextStyle(
+                      color: isDarkMode(), fontWeight: FontWeight.bold)),
+              TextSpan(
+                  text:
+                      request ? " requested to follow you. " : " ${content!} ",
+                  style: TextStyle(color: isDarkMode())),
+              TextSpan(text: time, style: TextStyle(color: Colors.grey))
+            ]),
           )
-        : cross
-            ? Icon(
-                Icons.close,
-                size: 20.h,
+        : Text("Username $index"),
+    subtitle: subtitle ? Text(content!) : null,
+    trailing: trailing
+        ? (chat
+            ? const Icon(
+                Icons.camera_enhance_outlined,
+                color: Colors.grey,
               )
-            : null,
+            : call
+                ? SizedBox(
+                    width: 60.w,
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.call_outlined,
+                          color: isDarkMode(),
+                          size: 22.h,
+                        ),
+                        const Spacer(),
+                        Icon(
+                          Icons.video_call_outlined,
+                          color: isDarkMode(),
+                          size: 28.h,
+                        )
+                      ],
+                    ),
+                  )
+                : Icon(
+                    Icons.close,
+                    size: 20.h,
+                  ))
+        : (notification
+            ? (request
+                ? SizedBox(
+                    width: 150.w,
+                    child: Row(
+                      children: [
+                        button(title: "Confirm", color: Colors.blue),
+                        SizedBox(
+                          width: 5.w,
+                        ),
+                        button(title: "Delete", color: Colors.white)
+                      ],
+                    ),
+                  )
+                : Image.asset(notificationImage!))
+            : null),
     contentPadding: EdgeInsets.fromLTRB(8.w, 0.0, 10.w, 0.0),
   );
 }
@@ -165,20 +209,7 @@ Widget postWidget(int index, bool follow) {
                 ),
                 Visibility(
                     visible: follow,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: Text(
-                        "Follow",
-                        style: TextStyle(color: Colors.white, fontSize: 12.sp),
-                      ),
-                      style: ButtonStyle(
-                        visualDensity: VisualDensity.compact,
-                        padding: MaterialStateProperty.all<EdgeInsets>(
-                            EdgeInsets.zero),
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.blue),
-                      ),
-                    ))
+                    child: button(title: "Follow", color: Colors.blue))
               ],
             )),
             IconButton(
@@ -306,5 +337,26 @@ Widget addcomment(String image) {
             hintStyle: TextStyle(fontSize: 14.sp)),
       ))
     ],
+  );
+}
+
+Widget button({required String title, required Color color}) {
+  return ElevatedButton(
+    onPressed: () {},
+    child: Text(
+      title,
+      style: TextStyle(
+          color: color == Colors.blue ? Colors.white : Colors.black,
+          fontSize: 12.sp),
+    ),
+    style: ButtonStyle(
+        visualDensity: VisualDensity.compact,
+        minimumSize: MaterialStateProperty.all<Size>(Size(80.w, 30.h)),
+        padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.zero),
+        elevation: MaterialStateProperty.all<double>(0.0),
+        backgroundColor: MaterialStateProperty.all<Color>(color),
+        side: MaterialStateProperty.all<BorderSide>(BorderSide(
+            color: color == Colors.blue ? color : Colors.grey.shade300,
+            width: 0.5.w))),
   );
 }

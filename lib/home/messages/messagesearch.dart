@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:insta_layout/others/cnc.dart';
 import 'package:insta_layout/others/components.dart';
 import '../controller/homecontroller.dart';
 
@@ -32,9 +33,24 @@ class MessageSearchScreen extends GetView<HomeController> {
               SizedBox(
                 height: 10.h,
               ),
-              callWidget(
-                  3, controller.images[3], controller.images[3].toString(),
-                  cross: true),
+              CNCWidget(
+                userImage: controller.images[3],
+                title: "Username 3",
+                trailing: Icon(
+                  Icons.close,
+                  size: 20.h,
+                ),
+                content: controller.images[3].toString(),
+              ),
+              CNCWidget(
+                userImage: controller.images[4],
+                title: "Username 4",
+                trailing: Icon(
+                  Icons.close,
+                  size: 20.h,
+                ),
+                content: controller.images[4].toString(),
+              ),
               SizedBox(
                 height: 10.h,
               ),
@@ -52,10 +68,17 @@ class MessageSearchScreen extends GetView<HomeController> {
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: controller.images.length - 1,
                       itemBuilder: (context, index) {
-                        return callWidget(
-                            index + 1,
-                            controller.images[index + 1],
-                            controller.images[index + 1].toString());
+                        return CNCWidget(
+                          userImage: controller.images[index + 1],
+                          title: "Username ${index + 1}",
+                          content: controller.images[index + 1].toString(),
+                        );
+                        // cncWidget(
+                        //   index + 1,
+                        //   controller.images[index + 1],
+                        //   content: controller.images[index + 1].toString(),
+                        //   subtitle: true,
+                        // );
                       }))
             ],
           ),

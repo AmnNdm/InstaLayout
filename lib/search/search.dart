@@ -8,38 +8,8 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:insta_layout/search/searchcontroller.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
-// List<StaggeredGridTile> _staggeredTiles = const <StaggeredGridTile>[
-//   StaggeredGridTile.count(crossAxisCellCount: 2, mainAxisCellCount: 2, child: _Example01Tile(Colors.green, Icons.widgets)),
-
-//   const StaggeredTile.count(2, 2),
-//   const StaggeredTile.count(2, 1),
-//   const StaggeredTile.count(1, 2),
-//   const StaggeredTile.count(1, 1),
-//   const StaggeredTile.count(2, 2),
-//   const StaggeredTile.count(1, 2),
-//   const StaggeredTile.count(1, 1),
-//   const StaggeredTile.count(3, 1),
-//   const StaggeredTile.count(1, 1),
-//   const StaggeredTile.count(4, 1),
-// ];
-
-// List<Widget> _tiles = const <Widget>[
-//   const _Example01Tile(Colors.green, Icons.widgets),
-//   const _Example01Tile(Colors.lightBlue, Icons.wifi),
-//   const _Example01Tile(Colors.amber, Icons.panorama_wide_angle),
-//   const _Example01Tile(Colors.brown, Icons.map),
-//   const _Example01Tile(Colors.deepOrange, Icons.send),
-//   const _Example01Tile(Colors.indigo, Icons.airline_seat_flat),
-//   const _Example01Tile(Colors.red, Icons.bluetooth),
-//   const _Example01Tile(Colors.pink, Icons.battery_alert),
-//   const _Example01Tile(Colors.purple, Icons.desktop_windows),
-//   const _Example01Tile(Colors.blue, Icons.radio),
-// ];
-
 class SearchScreen extends GetView<SearchController> {
-  SearchScreen({Key? key}) : super(key: key) {
-    Get.put(SearchController());
-  }
+  SearchScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +68,7 @@ class SearchScreen extends GetView<SearchController> {
         mainAxisCellCount: 1,
         child: GestureDetector(
             onTap: () {
-              pushNewScreen(context, screen: Explore(), withNavBar: true);
+              pushNewScreen(context, screen: const Explore(), withNavBar: true);
             },
             child: Tile(
               type: type,
@@ -110,8 +80,8 @@ class SearchScreen extends GetView<SearchController> {
       crossAxisCellCount: 2,
       mainAxisCellCount: 2,
       child: GestureDetector(
-          onTap: () =>
-              pushNewScreen(context, screen: Suggestion(), withNavBar: true),
+          onTap: () => pushNewScreen(context,
+              screen: const Suggestion(), withNavBar: true),
           child: Tile(type: type)),
     );
   }

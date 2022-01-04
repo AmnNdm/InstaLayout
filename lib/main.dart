@@ -3,7 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:insta_layout/activity.dart';
+import 'package:insta_layout/activity/activity.dart';
+import 'package:insta_layout/appbindings.dart';
 import 'package:insta_layout/home/messages/messages.dart';
 import 'package:insta_layout/others/customnavigationbar.dart';
 import 'package:insta_layout/post.dart';
@@ -85,6 +86,7 @@ class MyApp extends StatelessWidget {
           "/explorevideos": (context) => const Suggestion(),
           "/explore": (context) => const Explore()
         },
+        initialBinding: AppBindings(),
       ),
     );
   }

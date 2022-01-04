@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:insta_layout/home/messages/messagesearch.dart';
 import 'package:insta_layout/home/messages/requests.dart';
+import 'package:insta_layout/others/cnc.dart';
 import 'package:insta_layout/others/components.dart';
 import 'package:insta_layout/others/constants.dart';
 
@@ -75,28 +76,40 @@ class MessagesScreen extends GetView<HomeController> {
   }
 
   Widget chats(BuildContext context) {
-    return Padding(
-      padding: allPadding,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          searchBar(page: const MessageSearchScreen(), context: context),
-          SizedBox(
-            height: 10.h,
-          ),
-          Flexible(
-            fit: FlexFit.loose,
-            child: ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: 11,
-                itemBuilder: (context, index) {
-                  return chatWidget(index, controller.images[index],
-                      controller.messages[index]);
-                }),
-          )
-        ],
-      ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Padding(
+          padding: allPadding,
+          child: searchBar(page: const MessageSearchScreen(), context: context),
+        ),
+        SizedBox(
+          height: 10.h,
+        ),
+        Flexible(
+          fit: FlexFit.loose,
+          child: ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: 11,
+              itemBuilder: (context, index) {
+                return CNCWidget(
+                  userImage: controller.images[index],
+                  title: "Username $index",
+                  content: controller.messages[index],
+                  trailing: const Icon(
+                    Icons.camera_enhance_outlined,
+                    color: Colors.grey,
+                  ),
+                );
+                // cncWidget(index, controller.images[index],
+                //     content: controller.messages[index],
+                //     subtitle: true,
+                //     trailing: true,
+                //     chat: true);
+              }),
+        )
+      ],
     );
   }
 
@@ -143,8 +156,33 @@ class MessagesScreen extends GetView<HomeController> {
                   shrinkWrap: true,
                   itemCount: 11,
                   itemBuilder: (context, index) {
-                    return callWidget(index, controller.images[index],
-                        controller.images[index].toString());
+                    return CNCWidget(
+                        userImage: controller.images[index],
+                        title: "Username $index",
+                        content: controller.images[index].toString(),
+                        trailing: SizedBox(
+                          width: 60.w,
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.call_outlined,
+                                color: isDarkMode(),
+                                size: 22.h,
+                              ),
+                              const Spacer(),
+                              Icon(
+                                Icons.video_call_outlined,
+                                color: isDarkMode(),
+                                size: 28.h,
+                              )
+                            ],
+                          ),
+                        ));
+                    // cncWidget(index, controller.images[index],
+                    //     content: controller.images[index].toString(),
+                    //     subtitle: true,
+                    //     trailing: true,
+                    //     call: true);
                   }))
         ]);
   }
@@ -175,16 +213,16 @@ class MessagesScreen extends GetView<HomeController> {
     );
   }
 
-  Widget chatWidget(int index, String image, String message) {
-    return ListTile(
-      leading: profileImage(28, image),
-      title: Text("Username $index"),
-      subtitle: Text(message),
-      trailing: const Icon(
-        Icons.camera_enhance_outlined,
-        color: Colors.grey,
-      ),
-      contentPadding: EdgeInsets.zero,
-    );
-  }
+  // Widget chatWidget(int index, String image, String message) {
+  //   return ListTile(
+  //     leading: profileImage(28, image),
+  //     title: Text("Username $index"),
+  //     subtitle: Text(message),
+  //     trailing: const Icon(
+  //       Icons.camera_enhance_outlined,
+  //       color: Colors.grey,
+  //     ),
+  //     contentPadding: EdgeInsets.zero,
+  //   );
+  // }
 }

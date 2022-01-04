@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:insta_layout/others/constants.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../activity.dart';
+import '../activity/activity.dart';
 import 'components.dart';
 import '../home/home.dart';
 import '../post.dart';
@@ -61,12 +62,8 @@ class BottomBarState extends State<CustomBottomBar> {
         inactiveColorPrimary: color,
       ),
       PersistentBottomNavBarItem(
-        icon: const Icon(
-          Icons.circle,
-        ),
-        inactiveIcon: const Icon(
-          Icons.circle_outlined,
-        ),
+        icon: userIcon(color: color),
+        inactiveIcon: userIcon(color: isnotDarkMode()),
         activeColorPrimary: color,
         inactiveColorPrimary: color,
       )
@@ -98,6 +95,14 @@ class BottomBarState extends State<CustomBottomBar> {
       stateManagement: true,
       handleAndroidBackButtonPress: true,
       navBarStyle: NavBarStyle.style12,
+    );
+  }
+
+  Widget userIcon({required Color color}) {
+    return CircleAvatar(
+      backgroundColor: color,
+      radius: 13.r,
+      child: profileImage(12, Constants.user0),
     );
   }
 }
