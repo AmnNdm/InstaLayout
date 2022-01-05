@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:insta_layout/others/circularWidget.dart';
+import 'package:insta_layout/others/circularwidget.dart';
 import 'package:insta_layout/others/components.dart';
 import 'package:insta_layout/others/constants.dart';
 

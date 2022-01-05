@@ -54,6 +54,7 @@ appbar(Widget title,
 Widget profileImage(double r, String image) {
   return CircleAvatar(
     radius: r.r,
+    backgroundColor: Colors.black,
     foregroundImage: AssetImage(
       image,
     ),

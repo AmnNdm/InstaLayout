@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:insta_layout/home/comments.dart';
+import 'package:insta_layout/home/controller/homecontroller.dart';
 
 import 'components.dart';
 import 'constants.dart';
@@ -51,7 +52,7 @@ class PostWidget extends StatelessWidget {
                     style:
                         TextStyle(fontWeight: FontWeight.w600, fontSize: 14.sp),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Visibility(
                       visible: follow,
                       child: button(title: "Follow", color: Colors.blue))
@@ -60,7 +61,6 @@ class PostWidget extends StatelessWidget {
               IconButton(
                 onPressed: () {
                   Get.bottomSheet(bottomsheet!,
-                      barrierColor: Colors.black45,
                       backgroundColor:
                           MediaQuery.of(context).platformBrightness ==
                                   Brightness.dark
@@ -80,7 +80,7 @@ class PostWidget extends StatelessWidget {
         ),
         GestureDetector(
             onDoubleTap: () {
-              // TODO: handle tap
+              // TODO: handle like tap
               like.toggle();
               // ontap;
             },
@@ -128,7 +128,7 @@ class PostWidget extends StatelessWidget {
         ObxValue((RxBool rxBool) {
           return GestureDetector(
               onTap: () {
-                // TODO: handle tap here too
+                // TODO: handle like tap here too
                 // ontap;
                 rxBool.toggle();
               },
@@ -182,7 +182,7 @@ class PostWidget extends StatelessWidget {
   Widget likes(int likes) {
     return Text(
       '$likes likes',
-      style: TextStyle(fontWeight: FontWeight.w800),
+      style: const TextStyle(fontWeight: FontWeight.w800),
     );
   }
 
@@ -200,6 +200,16 @@ class PostWidget extends StatelessWidget {
           decoration: InputDecoration.collapsed(
               hintText: "Add a comment...",
               hintStyle: TextStyle(fontSize: 14.sp)),
+          onTap: () {
+            Get.bottomSheet(
+              CommentBottomSheet(),
+              barrierColor: Colors.transparent,
+              backgroundColor: MediaQuery.of(Get.context!).platformBrightness ==
+                      Brightness.dark
+                  ? Colors.grey.shade900
+                  : Colors.white,
+            );
+          },
         ))
       ],
     );
@@ -209,6 +219,110 @@ class PostWidget extends StatelessWidget {
     return Text(
       time,
       style: TextStyle(fontSize: 10.sp),
+    );
+  }
+}
+
+class CommentBottomSheet extends StatelessWidget {
+  bool isButtonActive = false;
+  TextEditingController tec = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return StatefulBuilder(
+      builder: (context, setState) => Container(
+        height: 100.h,
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.fromLTRB(10.w, 10.h, 10.w, 10.h),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Icon(
+                    Icons.emoji_emotions,
+                    size: 30.h,
+                  ),
+                  Icon(
+                    Icons.emoji_emotions,
+                    size: 30.h,
+                  ),
+                  Icon(
+                    Icons.emoji_emotions,
+                    size: 30.h,
+                  ),
+                  Icon(
+                    Icons.emoji_emotions,
+                    size: 30.h,
+                  ),
+                  Icon(
+                    Icons.emoji_emotions,
+                    size: 30.h,
+                  ),
+                  Icon(
+                    Icons.emoji_emotions,
+                    size: 30.h,
+                  ),
+                  Icon(
+                    Icons.emoji_emotions,
+                    size: 30.h,
+                  ),
+                  Icon(
+                    Icons.emoji_emotions,
+                    size: 30.h,
+                  ),
+                ],
+              ),
+            ),
+            Divider(
+              height: 1.h,
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(10.w, 0.h, 10.w, 0.h),
+              child: Row(
+                children: [
+                  profileImage(18, Constants.user0),
+                  SizedBox(
+                    width: 10.w,
+                  ),
+                  Expanded(
+                    child: TextField(
+                      autofocus: true,
+                      cursorColor: Colors.teal,
+                      decoration: InputDecoration.collapsed(
+                          hintText: "Comment as username0",
+                          hintStyle: TextStyle(color: Colors.grey.shade400)),
+                      controller: tec,
+                      onChanged: (value) {
+                        setState(() {
+                          isButtonActive = value.isNotEmpty;
+                        });
+                      },
+                    ),
+                  ),
+                  TextButton(
+                      onPressed: isButtonActive
+                          ? () {
+                              tec.clear();
+                              setState(() {
+                                isButtonActive = false;
+                              });
+                            }
+                          : null,
+                      style: TextButton.styleFrom(
+                          textStyle: const TextStyle(fontSize: 14),
+                          padding: EdgeInsets.zero,
+                          primary: Colors.blue,
+                          onSurface: Colors.blue),
+                      child: const Text(
+                        "Post",
+                      ))
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

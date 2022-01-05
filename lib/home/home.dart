@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:insta_layout/others/circularWidget.dart';
+import 'package:insta_layout/others/circularwidget.dart';
 import 'package:insta_layout/others/components.dart';
 import 'package:insta_layout/others/constants.dart';
 import 'package:insta_layout/home/controller/homecontroller.dart';
@@ -177,9 +177,9 @@ class MyHomePage extends GetView<HomeController> {
               ],
             ),
           ),
-          Divider(),
+          const Divider(),
           thisText("Why you're seeing this post"),
-          Divider(),
+          const Divider(),
           thisText("Hide"),
           SizedBox(
             height: 16.h,
