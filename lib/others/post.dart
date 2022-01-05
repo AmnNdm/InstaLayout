@@ -11,7 +11,7 @@ class PostWidget extends StatelessWidget {
   final bool follow;
   final Function()? ontap;
   final RxBool like;
-  final Function()? bottomsheet;
+  final Widget? bottomsheet;
 
   const PostWidget(
       {Key? key,
@@ -58,8 +58,19 @@ class PostWidget extends StatelessWidget {
                 ],
               )),
               IconButton(
-                // TODO: add bottom sheet
-                onPressed: bottomsheet,
+                onPressed: () {
+                  Get.bottomSheet(bottomsheet!,
+                      barrierColor: Colors.black45,
+                      backgroundColor:
+                          MediaQuery.of(context).platformBrightness ==
+                                  Brightness.dark
+                              ? Colors.grey.shade900
+                              : Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(15.r),
+                              topRight: Radius.circular(15.r))));
+                },
                 icon: const Icon(Icons.more_vert),
                 padding: EdgeInsets.zero,
                 alignment: Alignment.centerRight,

@@ -22,7 +22,7 @@ class Explore extends GetView<SearchController> {
               postimage: controller.postimages[index],
               time: "1 hour ago",
               follow: true,
-              like: controller.like,
+              like: controller.like[index],
             );
           },
           itemCount: 10,

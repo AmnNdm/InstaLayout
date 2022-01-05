@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:insta_layout/others/circularWidget.dart';
 import 'package:insta_layout/others/components.dart';
 import 'package:insta_layout/others/constants.dart';
 import 'package:insta_layout/home/controller/homecontroller.dart';
@@ -67,24 +68,12 @@ class MyHomePage extends GetView<HomeController> {
     return ListView.builder(
       itemBuilder: (context, index) {
         return PostWidget(
-          username: "Username $index",
-          userimage: controller.images[index],
-          postimage: Constants.postImage,
-          time: "1 hour ago",
-          like: controller.like,
-          bottomsheet: () {
-            Get.bottomSheet(postBottomSheet(),
-                barrierColor: Colors.black45,
-                backgroundColor:
-                    MediaQuery.of(context).platformBrightness == Brightness.dark
-                        ? Colors.grey.shade900
-                        : Colors.white,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(15.r),
-                        topRight: Radius.circular(15.r))));
-          },
-        );
+            username: "Username $index",
+            userimage: controller.images[index],
+            postimage: Constants.postImage,
+            time: "1 hour ago",
+            like: controller.like[index],
+            bottomsheet: postBottomSheet());
       },
       itemCount: 10,
       scrollDirection: Axis.vertical,
@@ -139,10 +128,76 @@ class MyHomePage extends GetView<HomeController> {
 
   Widget postBottomSheet() {
     return Container(
-      height: 250.h,
-      padding: EdgeInsets.fromLTRB(8.w, 8.h, 8.w, 10.h),
+      height: 270.h,
+      padding: EdgeInsets.fromLTRB(0.w, 10.h, 0.w, 10.h),
       child: Column(
-        children: [],
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+            child: Container(
+              height: 4.h,
+              width: 40.w,
+              decoration: BoxDecoration(
+                  color: Colors.grey,
+                  borderRadius: BorderRadius.circular(10.r)),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(26.w, 20.h, 26.w, 10.h),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CircularWidget(
+                  height: 56,
+                  width: 59,
+                  border: 1.3,
+                  child: const Icon(
+                    Icons.link,
+                  ),
+                  title: "Link",
+                ),
+                CircularWidget(
+                  height: 56,
+                  width: 59,
+                  border: 1.3,
+                  child: const Icon(Icons.share_outlined),
+                  title: "Share",
+                ),
+                CircularWidget(
+                  height: 56,
+                  width: 59,
+                  border: 1.3,
+                  child: Icon(
+                    Icons.report_gmailerrorred_outlined,
+                    color: Colors.red.shade400,
+                  ),
+                  title: "Report",
+                  color: Colors.red.shade400,
+                )
+              ],
+            ),
+          ),
+          Divider(),
+          thisText("Why you're seeing this post"),
+          Divider(),
+          thisText("Hide"),
+          SizedBox(
+            height: 16.h,
+          ),
+          thisText("Unfollow")
+        ],
+      ),
+    );
+  }
+
+  Widget thisText(String title) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(12.w, 5.h, 12.w, 5.h),
+      child: Text(
+        title,
+        style: TextStyle(
+          fontSize: 16.sp,
+        ),
       ),
     );
   }

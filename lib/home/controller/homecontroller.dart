@@ -35,8 +35,23 @@ class HomeController extends GetxController {
     "Sent 1 hour ago",
   ];
 
-  RxBool like = false.obs;
+  List<RxBool> like = [
+    false.obs,
+    false.obs,
+    false.obs,
+    false.obs,
+    false.obs,
+    false.obs,
+    false.obs,
+    false.obs,
+    false.obs,
+    false.obs,
+    false.obs,
+    false.obs,
+    false.obs,
+  ];
   RxInt likes = 0.obs;
+
   int onLikePressed() {
     return (likes += 1).value;
   }

@@ -3,8 +3,23 @@ import 'package:insta_layout/others/constants.dart';
 
 class SearchController extends GetxController {
   RxBool left = true.obs;
-  RxBool like = false.obs;
   RxInt likes = 0.obs;
+
+  List<RxBool> like = [
+    false.obs,
+    false.obs,
+    false.obs,
+    false.obs,
+    false.obs,
+    false.obs,
+    false.obs,
+    false.obs,
+    false.obs,
+    false.obs,
+    false.obs,
+    false.obs,
+    false.obs,
+  ];
 
   int onLikePressed() {
     return (likes += 1).value;

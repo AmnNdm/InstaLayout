@@ -22,7 +22,7 @@ class Suggestion extends GetView<SearchController> {
                 postimage: controller.postimages[index],
                 time: "1 day ago",
                 follow: true,
-                like: controller.like,
+                like: controller.like[index],
               );
             },
             itemCount: 10,

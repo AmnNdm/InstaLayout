@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:insta_layout/others/circularWidget.dart';
 import 'package:insta_layout/others/components.dart';
 import 'package:insta_layout/others/constants.dart';
 
@@ -16,11 +17,10 @@ class RequestsScreen extends StatelessWidget {
           children: [
             Container(
               padding: allPadding,
-              height: 50.h,
               decoration: BoxDecoration(
                   border:
                       Border(bottom: BorderSide(color: Colors.grey.shade300)),
-                  color: Colors.grey.shade200),
+                  color: Colors.grey.shade300),
               child: Text(
                 Constants.requestDisclaimer,
                 style: TextStyle(color: Colors.grey.shade600, fontSize: 12.sp),
@@ -31,13 +31,10 @@ class RequestsScreen extends StatelessWidget {
               height: 8.h,
             ),
             ListTile(
-                leading: Container(
-                  height: 50.h,
-                  width: 55.w,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100.r),
-                    border: Border.all(width: 1.w, color: Colors.grey.shade300),
-                  ),
+                leading: CircularWidget(
+                  height: 50,
+                  width: 53,
+                  border: 1,
                   child: Icon(
                     Icons.visibility_off,
                     size: 20.h,
@@ -62,25 +59,17 @@ class RequestsScreen extends StatelessWidget {
             Flexible(
                 fit: FlexFit.loose,
                 child: Column(children: [
-                  Container(
-                      height: 95.h,
-                      width: 100.w,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100.r),
-                        border: Border.all(width: 1.5.w, color: isDarkMode()),
-                      ),
-                      child: Image.asset(
-                        Constants.message,
-                        scale: 1.1.h,
-                        color: isDarkMode(),
-                      )),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Text(
-                    "No Message Requests",
-                    style:
-                        TextStyle(fontWeight: FontWeight.w600, fontSize: 18.sp),
+                  CircularWidget(
+                    height: 95,
+                    width: 100,
+                    border: 1.5,
+                    child: Image.asset(
+                      Constants.message,
+                      scale: 1.1.h,
+                      color: isDarkMode(),
+                    ),
+                    title: "No Message Requests",
+                    fontsize: 18,
                   ),
                   SizedBox(
                     height: 10.h,
