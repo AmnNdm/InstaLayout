@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:insta_layout/others/components.dart';
-import 'package:insta_layout/search/explore.dart';
-import 'package:insta_layout/search/suggestions.dart';
-import 'package:insta_layout/search/searchcontent.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:insta_layout/search/controller/searchcontroller.dart';
+import 'package:insta_layout/components/appbar.dart';
+import 'package:insta_layout/components/customwidgets.dart';
+import 'package:insta_layout/controllers/searchcontroller.dart';
+import 'package:insta_layout/views/search/searchcontent.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+
+import 'explore.dart';
+import 'suggestions.dart';
 
 class SearchScreen extends GetView<SearchController> {
   const SearchScreen({Key? key}) : super(key: key);
@@ -16,28 +18,18 @@ class SearchScreen extends GetView<SearchController> {
     return Scaffold(
         body: NestedScrollView(
             headerSliverBuilder: (context, innerBoxIsScrolled) => [
-                  appbar(
-                      searchBar(
+                  MyAppBar(
+                      title: searchBar(
                           page: const SearchContent(),
                           withNavbar: true,
-                          context: context),
-                      sliver: true)
+                          context: context))
                 ],
-            body:
-                // SingleChildScrollView(
-                //   child: Column(
-                //     children: [
-                //       tiles(controller.left.toggle().value),
-                //       tiles(controller.left.toggle().value)
-                //     ],
-                //   ),
-                // )
-                ListView.builder(
-                    padding: EdgeInsets.zero,
-                    itemCount: 2,
-                    itemBuilder: (context, index) {
-                      return tiles(controller.left.toggle().value, context);
-                    })));
+            body: ListView.builder(
+                padding: EdgeInsets.zero,
+                itemCount: 2,
+                itemBuilder: (context, index) {
+                  return tiles(controller.left.toggle().value, context);
+                })));
   }
 
   tiles(bool left, BuildContext context) {

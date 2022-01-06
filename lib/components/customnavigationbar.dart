@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:insta_layout/others/constants.dart';
+import 'package:insta_layout/components/constants.dart';
+import 'package:insta_layout/views/activity/activity.dart';
+import 'package:insta_layout/views/home/home.dart';
+import 'package:insta_layout/views/search/search.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../activity/activity.dart';
-import 'components.dart';
-import '../home/home.dart';
-import '../post.dart';
-import '../profile.dart';
-import '../search/search.dart';
+import 'customwidgets.dart';
+import '../views/post.dart';
+import '../views/profile/profile.dart';
 
 class CustomBottomBar extends StatefulWidget {
   const CustomBottomBar({Key? key}) : super(key: key);
@@ -71,9 +71,7 @@ class BottomBarState extends State<CustomBottomBar> {
   }
 
   final List<Widget> screens = [
-    const MyHomePage(
-      hideStatus: false,
-    ),
+    const MyHomePage(),
     const SearchScreen(),
     const PostScreen(),
     const ActivityScreen(),

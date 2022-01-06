@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:insta_layout/others/circularwidget.dart';
-import 'package:insta_layout/others/components.dart';
-import 'package:insta_layout/others/constants.dart';
+import 'package:insta_layout/components/appbar.dart';
+import 'package:insta_layout/components/circularwidget.dart';
+import 'package:insta_layout/components/constants.dart';
+import 'package:insta_layout/components/customwidgets.dart';
 
 class RequestsScreen extends StatelessWidget {
   const RequestsScreen({Key? key}) : super(key: key);
@@ -10,7 +11,14 @@ class RequestsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appbar(const Text("Message requests")),
+        body: NestedScrollView(
+      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+        return [
+          MyAppBar(
+            title: const Text("Message requests"),
+          ),
+        ];
+      },
       body: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -84,6 +92,6 @@ class RequestsScreen extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ));
   }
 }

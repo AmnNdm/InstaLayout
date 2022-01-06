@@ -23,33 +23,33 @@ Color isnotDarkMode() {
 
 EdgeInsetsGeometry allPadding = EdgeInsets.fromLTRB(16.w, 8.h, 12.w, 8.h);
 
-appbar(Widget title,
-    {bool bottom = false,
-    Widget? flexibleWidget,
-    Widget? action,
-    sliver = false}) {
-  return sliver
-      ? SliverAppBar(
-          floating: true,
-          pinned: true,
-          backgroundColor: isnotDarkMode(),
-          title: title,
-          elevation: 0.2,
-          actions: action != null ? [action] : null,
-        )
-      : AppBar(
-          backgroundColor: isnotDarkMode(),
-          elevation: 0.0,
-          title: title,
-          actions: action != null ? [action] : null,
-          bottom: bottom
-              ? PreferredSize(
-                  child: flexibleWidget!,
-                  preferredSize: Size.fromHeight(
-                      MediaQuery.of(Get.context!).size.height / 16))
-              : null,
-        );
-}
+// appbar(Widget title,
+//     {bool bottom = false,
+//     Widget? flexibleWidget,
+//     Widget? action,
+//     sliver = false}) {
+//   return sliver
+//       ? SliverAppBar(
+//           floating: true,
+//           pinned: true,
+//           backgroundColor: isnotDarkMode(),
+//           title: title,
+//           elevation: 0.2,
+//           actions: action != null ? [action] : null,
+//         )
+//       : AppBar(
+//           backgroundColor: isnotDarkMode(),
+//           elevation: 0.0,
+//           title: title,
+//           actions: action != null ? [action] : null,
+//           bottom: bottom
+//               ? PreferredSize(
+//                   child: flexibleWidget!,
+//                   preferredSize: Size.fromHeight(
+//                       MediaQuery.of(Get.context!).size.height / 16))
+//               : null,
+//         );
+// }
 
 Widget profileImage(double r, String image) {
   return CircleAvatar(

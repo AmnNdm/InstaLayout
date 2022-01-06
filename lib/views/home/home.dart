@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:insta_layout/others/circularwidget.dart';
-import 'package:insta_layout/others/components.dart';
-import 'package:insta_layout/others/constants.dart';
-import 'package:insta_layout/home/controller/homecontroller.dart';
-import 'package:insta_layout/home/messages/messages.dart';
+import 'package:insta_layout/components/appbar.dart';
+import 'package:insta_layout/components/circularwidget.dart';
+import 'package:insta_layout/components/constants.dart';
+import 'package:insta_layout/components/customwidgets.dart';
+import 'package:insta_layout/components/postwidget.dart';
+import 'package:insta_layout/controllers/homecontroller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:insta_layout/others/post.dart';
+import 'package:insta_layout/views/messages/messages.dart';
 
 class MyHomePage extends GetView<HomeController> {
-  final bool hideStatus;
-  const MyHomePage({Key? key, this.hideStatus = false}) : super(key: key);
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,17 +19,18 @@ class MyHomePage extends GetView<HomeController> {
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return [
-            appbar(const Text("InstaLayout"),
-                action: GestureDetector(
-                    onTap: () {
-                      Get.to(() => const MessagesScreen());
-                    },
-                    child: Image.asset(
-                      Constants.message,
-                      scale: 2.5.h,
-                      color: isDarkMode(),
-                    )),
-                sliver: true)
+            MyAppBar(
+              title: const Text("InstaLayout"),
+              action: GestureDetector(
+                  onTap: () {
+                    Get.to(() => const MessagesScreen());
+                  },
+                  child: Image.asset(
+                    Constants.message,
+                    scale: 2.5.h,
+                    color: isDarkMode(),
+                  )),
+            )
           ];
         },
         body: SingleChildScrollView(

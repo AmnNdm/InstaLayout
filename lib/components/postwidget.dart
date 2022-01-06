@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:insta_layout/home/comments.dart';
+import 'package:insta_layout/views/home/comments.dart';
 
 import 'commentbottomsheet.dart';
-import 'components.dart';
+import 'customwidgets.dart';
 import 'constants.dart';
 
 class PostWidget extends StatelessWidget {

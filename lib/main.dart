@@ -3,16 +3,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:insta_layout/activity/activity.dart';
 import 'package:insta_layout/appbindings.dart';
-import 'package:insta_layout/home/messages/messages.dart';
-import 'package:insta_layout/others/customnavigationbar.dart';
-import 'package:insta_layout/post.dart';
-import 'package:insta_layout/profile.dart';
-import 'package:insta_layout/search/explore.dart';
-import 'package:insta_layout/search/suggestions.dart';
-import 'package:insta_layout/search/search.dart';
-import 'package:insta_layout/search/searchcontent.dart';
+import 'package:insta_layout/views/activity/activity.dart';
+import 'package:insta_layout/views/messages/messages.dart';
+import 'package:insta_layout/views/post.dart';
+import 'package:insta_layout/views/profile/profile.dart';
+import 'package:insta_layout/views/search/explore.dart';
+import 'package:insta_layout/views/search/search.dart';
+import 'package:insta_layout/views/search/searchcontent.dart';
+import 'package:insta_layout/views/search/suggestions.dart';
+
+import 'components/customnavigationbar.dart';
 
 void main() {
   runApp(const MyApp());

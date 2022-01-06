@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:insta_layout/others/constants.dart';
-import 'package:insta_layout/others/customnavigationbar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'components/constants.dart';
+import 'components/customnavigationbar.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);

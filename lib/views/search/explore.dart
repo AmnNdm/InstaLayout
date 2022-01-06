@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:insta_layout/others/components.dart';
-import 'package:insta_layout/others/post.dart';
-import 'package:insta_layout/search/controller/searchcontroller.dart';
+import 'package:insta_layout/components/appbar.dart';
+import 'package:insta_layout/components/customwidgets.dart';
+import 'package:insta_layout/components/postwidget.dart';
+import 'package:insta_layout/controllers/searchcontroller.dart';
 
 class Explore extends GetView<SearchController> {
   const Explore({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class Explore extends GetView<SearchController> {
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return [appbar(const Text("Explore"), sliver: true)];
+          return [MyAppBar(title: const Text("Explore"))];
         },
         body: ListView.builder(
           itemBuilder: (context, index) {

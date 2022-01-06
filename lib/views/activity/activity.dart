@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:insta_layout/activity/activitycontroller.dart';
-import 'package:insta_layout/activity/followrequests.dart';
-import 'package:insta_layout/others/cnc.dart';
-import 'package:insta_layout/others/components.dart';
-import 'package:insta_layout/others/constants.dart';
+import 'package:insta_layout/components/appbar.dart';
+import 'package:insta_layout/components/cnc.dart';
+import 'package:insta_layout/components/constants.dart';
+import 'package:insta_layout/components/customwidgets.dart';
+import 'package:insta_layout/controllers/activitycontroller.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+
+import 'followrequests.dart';
 
 class ActivityScreen extends GetView<ActivityController> {
   const ActivityScreen({Key? key}) : super(key: key);
@@ -16,7 +18,7 @@ class ActivityScreen extends GetView<ActivityController> {
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return [appbar(const Text("Activity"), sliver: true)];
+          return [MyAppBar(title: const Text("Activity"))];
         },
         body: SingleChildScrollView(
           child: Column(
@@ -27,7 +29,8 @@ class ActivityScreen extends GetView<ActivityController> {
                 leading: requests(120, Constants.userM),
                 title: "Follow requests",
                 content: "Approve or ignore requests",
-                ontap: () => pushNewScreen(context, screen: FollowRequests()),
+                ontap: () =>
+                    pushNewScreen(context, screen: const FollowRequests()),
               ),
               title("Today"),
               CNCWidget(

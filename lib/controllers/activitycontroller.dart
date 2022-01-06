@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:insta_layout/others/constants.dart';
+import 'package:insta_layout/components/constants.dart';
 
 class ActivityController extends GetxController {
   List images = [
