@@ -7,6 +7,8 @@ import 'package:insta_layout/components/customwidgets.dart';
 import 'package:insta_layout/controllers/homecontroller.dart';
 
 class Calls extends GetView<HomeController> {
+  const Calls({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(

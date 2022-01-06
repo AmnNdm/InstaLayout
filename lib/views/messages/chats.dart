@@ -8,6 +8,8 @@ import 'package:insta_layout/controllers/homecontroller.dart';
 import 'messagesearch.dart';
 
 class Chats extends GetView<HomeController> {
+  const Chats({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(

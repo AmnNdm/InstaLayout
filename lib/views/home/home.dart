@@ -21,15 +21,17 @@ class MyHomePage extends GetView<HomeController> {
           return [
             MyAppBar(
               title: const Text("InstaLayout"),
-              action: GestureDetector(
-                  onTap: () {
-                    Get.to(() => const MessagesScreen());
-                  },
-                  child: Image.asset(
-                    Constants.message,
-                    scale: 2.5.h,
-                    color: isDarkMode(),
-                  )),
+              action: [
+                GestureDetector(
+                    onTap: () {
+                      Get.to(() => const MessagesScreen());
+                    },
+                    child: Image.asset(
+                      Constants.message,
+                      scale: 2.5.h,
+                      color: isDarkMode(),
+                    ))
+              ],
             )
           ];
         },

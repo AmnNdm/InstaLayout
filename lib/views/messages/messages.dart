@@ -49,7 +49,7 @@ class MessagesScreen extends GetView<HomeController> {
                     MediaQuery.of(Get.context!).size.height / 16))),
         body: SingleChildScrollView(
           child: ObxValue((RxInt rxInt) {
-            return rxInt.value == 1 ? Chats() : Calls();
+            return rxInt.value == 1 ? const Chats() : const Calls();
           }, controller.currentTab),
         ));
   }

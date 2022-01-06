@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:insta_layout/views/home/comments.dart';
 
-import 'commentbottomsheet.dart';
+import '../views/home/commentbottomsheet.dart';
 import 'customwidgets.dart';
 import 'constants.dart';
 
@@ -80,7 +80,7 @@ class PostWidget extends StatelessWidget {
         ),
         GestureDetector(
             onDoubleTap: () {
-              // TODO: handle like tap
+              // TODO: handle like button tap
               like.toggle();
               // ontap;
             },
@@ -133,7 +133,7 @@ class PostWidget extends StatelessWidget {
         ObxValue((RxBool rxBool) {
           return GestureDetector(
               onTap: () {
-                // TODO: handle like tap here too
+                // TODO: handle like button tap here too
                 // ontap;
                 rxBool.toggle();
               },

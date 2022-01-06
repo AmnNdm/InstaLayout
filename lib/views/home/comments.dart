@@ -14,9 +14,8 @@ class CommentsScreen extends GetView<HomeController> {
         body: NestedScrollView(
       headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
         return [
-          MyAppBar(
-            title: const Text("Comments"),
-            action: GestureDetector(
+          MyAppBar(title: const Text("Comments"), action: [
+            GestureDetector(
               onTap: () {},
               child: Image.asset(
                 Constants.send,
@@ -24,7 +23,7 @@ class CommentsScreen extends GetView<HomeController> {
                 color: isDarkMode(),
               ),
             ),
-          ),
+          ]),
         ];
       },
       body: Container(),

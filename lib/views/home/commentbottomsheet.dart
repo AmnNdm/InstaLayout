@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'customwidgets.dart';
-import 'constants.dart';
+import '../../components/customwidgets.dart';
+import '../../components/constants.dart';
 
 // ignore: must_be_immutable
 class CommentBottomSheet extends StatelessWidget {
@@ -24,35 +24,35 @@ class CommentBottomSheet extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Icon(
-                    Icons.emoji_emotions,
+                    Icons.cake,
                     size: 30.h,
                   ),
                   Icon(
-                    Icons.emoji_emotions,
+                    Icons.mood_bad_outlined,
                     size: 30.h,
                   ),
                   Icon(
-                    Icons.emoji_emotions,
+                    Icons.sentiment_neutral,
                     size: 30.h,
                   ),
                   Icon(
-                    Icons.emoji_emotions,
+                    Icons.sentiment_satisfied,
                     size: 30.h,
                   ),
                   Icon(
-                    Icons.emoji_emotions,
+                    Icons.sentiment_very_satisfied,
                     size: 30.h,
                   ),
                   Icon(
-                    Icons.emoji_emotions,
+                    Icons.sentiment_very_dissatisfied,
                     size: 30.h,
                   ),
                   Icon(
-                    Icons.emoji_emotions,
+                    Icons.sick_outlined,
                     size: 30.h,
                   ),
                   Icon(
-                    Icons.emoji_emotions,
+                    Icons.catching_pokemon,
                     size: 30.h,
                   ),
                 ],
