@@ -16,7 +16,7 @@ class MessagesScreen extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: appbar(const Text("username"),
+        appBar: appbar(const Text("username0"),
             action: Padding(
               padding: EdgeInsets.only(right: 10.0.w),
               child: Row(

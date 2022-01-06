@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:insta_layout/activity/activitycontroller.dart';
+import 'package:insta_layout/activity/followrequests.dart';
 import 'package:insta_layout/others/cnc.dart';
 import 'package:insta_layout/others/components.dart';
 import 'package:insta_layout/others/constants.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class ActivityScreen extends GetView<ActivityController> {
   const ActivityScreen({Key? key}) : super(key: key);
@@ -25,6 +27,7 @@ class ActivityScreen extends GetView<ActivityController> {
                 leading: requests(120, Constants.userM),
                 title: "Follow requests",
                 content: "Approve or ignore requests",
+                ontap: () => pushNewScreen(context, screen: FollowRequests()),
               ),
               title("Today"),
               CNCWidget(

@@ -11,6 +11,7 @@ class CNCWidget extends StatelessWidget {
   final Widget? leading;
   final bool isNotification;
   final Function()? ontap;
+
   // String? notificationImage;
 
   const CNCWidget(
@@ -51,6 +52,7 @@ class CNCWidget extends StatelessWidget {
       subtitle: isNotification ? null : Text(content),
       trailing: trailing,
       contentPadding: EdgeInsets.fromLTRB(8.w, 0.0, 10.w, 0.0),
+      onTap: ontap,
     );
   }
 }

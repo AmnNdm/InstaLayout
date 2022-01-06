@@ -129,7 +129,7 @@ class MyHomePage extends GetView<HomeController> {
   Widget postBottomSheet() {
     return Container(
       height: 270.h,
-      padding: EdgeInsets.fromLTRB(0.w, 10.h, 0.w, 10.h),
+      padding: EdgeInsets.fromLTRB(0.w, 10.h, 0.w, 16.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -186,18 +186,6 @@ class MyHomePage extends GetView<HomeController> {
           ),
           thisText("Unfollow")
         ],
-      ),
-    );
-  }
-
-  Widget thisText(String title) {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(12.w, 5.h, 12.w, 5.h),
-      child: Text(
-        title,
-        style: TextStyle(
-          fontSize: 16.sp,
-        ),
       ),
     );
   }
