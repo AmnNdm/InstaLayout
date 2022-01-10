@@ -65,7 +65,6 @@ Widget searchBar(
     readOnly: true,
     onTap: () {
       pushNewScreen(context, screen: page, withNavBar: withNavbar);
-      // Get.to(() => page);
     },
   );
 }

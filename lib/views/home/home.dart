@@ -14,7 +14,6 @@ class MyHomePage extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    // isdark = brightness == Brightness.dark;
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {

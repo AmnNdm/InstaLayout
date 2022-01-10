@@ -3,7 +3,6 @@ import 'package:insta_layout/components/constants.dart';
 
 class HomeController extends GetxController {
   bool isdark = false;
-  // ScrollController scrollController = ScrollController();
 
   List images = [
     Constants.user0,

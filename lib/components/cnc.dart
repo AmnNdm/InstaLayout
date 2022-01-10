@@ -12,8 +12,6 @@ class CNCWidget extends StatelessWidget {
   final bool isNotification;
   final Function()? ontap;
 
-  // String? notificationImage;
-
   const CNCWidget(
       {Key? key,
       // required this.index,

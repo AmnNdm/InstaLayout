@@ -20,8 +20,7 @@ class Calls extends GetView<HomeController> {
             child: Text("Watch together",
                 style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600)),
           ),
-          // ignore: sized_box_for_whitespace
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height / 4,
             child: ListView.builder(
                 itemCount: 11,
