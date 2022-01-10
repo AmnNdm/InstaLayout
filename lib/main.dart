@@ -81,7 +81,7 @@ class MyApp extends StatelessWidget {
           "/search": (context) => const SearchScreen(),
           "/post": (context) => const PostScreen(),
           "/activity": (context) => const ActivityScreen(),
-          "/profile": (context) => const ProfileScreen(),
+          "/profile": (context) => ProfileScreen(),
           "/message": (context) => const MessagesScreen(),
           "/searchcontent": (context) => const SearchContent(),
           "/explorevideos": (context) => const Suggestion(),

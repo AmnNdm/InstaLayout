@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -9,7 +11,6 @@ import 'package:insta_layout/views/profile/allposts.dart';
 import 'package:insta_layout/views/profile/alltags.dart';
 import 'package:insta_layout/views/profile/allvideos.dart';
 import 'package:insta_layout/views/profile/stickyheaderwidget.dart';
-import 'package:insta_layout/views/messages/chats.dart';
 
 class ProfileScreen extends GetView<ProfileController> {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -26,30 +27,25 @@ class ProfileScreen extends GetView<ProfileController> {
                     IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
                     IconButton(onPressed: () {}, icon: const Icon(Icons.menu))
                   ],
-                )
+                ),
+                SliverToBoxAdapter(
+                  child: thatWeirdWidget(),
+                ),
+                StickyHeaderWidget()
               ],
-          body: CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(child: thatWidget()),
-              StickyHeaderWidget(),
-              SliverToBoxAdapter(
-                child: ObxValue((RxInt rxInt) {
-                  if (rxInt == 2) {
-                    return AllVideos();
-                  } else if (rxInt == 3) {
-                    return AllTags();
-                  } else {
-                    return AllPosts();
-                  }
-                }, controller.tab),
-              ),
-              // SliverToBoxAdapter(child: Chats())
-            ],
-          )),
+          body: ObxValue((RxInt rxInt) {
+            if (rxInt == 2) {
+              return AllVideos();
+            } else if (rxInt == 3) {
+              return AllTags();
+            } else {
+              return AllPosts();
+            }
+          }, controller.tab)),
     );
   }
 
-  Widget thatWidget() {
+  Widget thatWeirdWidget() {
     return Padding(
       padding: allPadding,
       child: Column(
@@ -60,7 +56,7 @@ class ProfileScreen extends GetView<ProfileController> {
               profileImage(45, Constants.user0),
               SizedBox(width: 40.w),
               figure(22, "Posts"),
-              SizedBox(width: 20.w),
+              SizedBox(width: 23.w),
               figure(22, "Followers"),
               SizedBox(width: 15.w),
               figure(22, "Following"),
@@ -80,7 +76,7 @@ class ProfileScreen extends GetView<ProfileController> {
             children: [
               ElevatedButton(
                 onPressed: () {},
-                child: Text("Edit profile"),
+                child: const Text("Edit profile"),
                 style: ButtonStyle(
                     visualDensity: VisualDensity.compact,
                     padding: MaterialStateProperty.all(EdgeInsets.zero),
@@ -88,11 +84,9 @@ class ProfileScreen extends GetView<ProfileController> {
                     side: MaterialStateProperty.all(
                         BorderSide(color: Colors.grey.shade300)),
                     minimumSize:
-                        MaterialStateProperty.all<Size>(Size(305.w, 35.h))),
+                        // TODO: 305.w
+                        MaterialStateProperty.all<Size>(Size(300.w, 35.h))),
               ),
-              // SizedBox(
-              //   width: 2.w,
-              // ),
               ElevatedButton(
                 onPressed: () {},
                 child: Icon(

@@ -84,10 +84,14 @@ class PostWidget extends StatelessWidget {
               like.toggle();
               // ontap;
             },
-            child: Image.asset(
-              postimage,
-              scale: 0.7.h,
-              // fit: BoxFit.fill,
+            child: Container(
+              height: 300.h,
+              width: 400.w,
+              child: Image.asset(
+                postimage,
+                scale: 0.7.h,
+                fit: BoxFit.cover,
+              ),
             )),
         Padding(
             padding: EdgeInsets.fromLTRB(12.0.w, 8.0.h, 12.0.w, 8.0.h),
