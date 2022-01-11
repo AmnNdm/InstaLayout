@@ -36,7 +36,13 @@ class ActivityScreen extends GetView<ActivityController> {
               CNCWidget(
                 userImage: Constants.userF,
                 title: Constants.userF.toString(),
-                trailing: Image.asset(Constants.imagenotification),
+                trailing: SizedBox(
+                    height: 50.h,
+                    width: 55.w,
+                    child: Image.asset(
+                      Constants.postImage,
+                      fit: BoxFit.cover,
+                    )),
                 isNotification: true,
                 content: " liked your image. ",
                 time: "1s",
@@ -63,7 +69,13 @@ class ActivityScreen extends GetView<ActivityController> {
               CNCWidget(
                 userImage: Constants.userF,
                 title: Constants.userF.toString(),
-                trailing: Image.asset(Constants.imagenotification),
+                trailing: SizedBox(
+                    height: 50.h,
+                    width: 55.w,
+                    child: Image.asset(
+                      Constants.postImage,
+                      fit: BoxFit.cover,
+                    )),
                 isNotification: true,
                 content: " liked your image. ",
                 time: "24h",
@@ -90,7 +102,13 @@ class ActivityScreen extends GetView<ActivityController> {
               CNCWidget(
                 userImage: Constants.userF,
                 title: Constants.userF.toString(),
-                trailing: Image.asset(Constants.imagenotification),
+                trailing: SizedBox(
+                    height: 50.h,
+                    width: 55.w,
+                    child: Image.asset(
+                      Constants.postImage,
+                      fit: BoxFit.cover,
+                    )),
                 isNotification: true,
                 content: " liked your image. ",
                 time: "2d",
@@ -117,7 +135,13 @@ class ActivityScreen extends GetView<ActivityController> {
               CNCWidget(
                 userImage: Constants.userF,
                 title: Constants.userF.toString(),
-                trailing: Image.asset(Constants.imagenotification),
+                trailing: SizedBox(
+                    height: 50.h,
+                    width: 55.w,
+                    child: Image.asset(
+                      Constants.postImage,
+                      fit: BoxFit.cover,
+                    )),
                 isNotification: true,
                 content: " liked your image. ",
                 time: "7d",
@@ -144,7 +168,13 @@ class ActivityScreen extends GetView<ActivityController> {
               CNCWidget(
                 userImage: Constants.userF,
                 title: Constants.userF.toString(),
-                trailing: Image.asset(Constants.imagenotification),
+                trailing: SizedBox(
+                    height: 50.h,
+                    width: 55.w,
+                    child: Image.asset(
+                      Constants.postImage,
+                      fit: BoxFit.cover,
+                    )),
                 isNotification: true,
                 content: " liked your image. ",
                 time: "5w",

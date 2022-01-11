@@ -6,9 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class CircularWidget extends StatelessWidget {
   final double height, width, border;
   final Widget child;
-  String title;
-  int fontsize;
-  Color? color;
+  Widget title;
+  bool hasTitle;
+  Color color;
 
   CircularWidget(
       {Key? key,
@@ -16,9 +16,9 @@ class CircularWidget extends StatelessWidget {
       required this.width,
       required this.border,
       required this.child,
-      this.title = "",
-      this.fontsize = 12,
-      this.color})
+      this.title = const Text("data"),
+      this.hasTitle = true,
+      required this.color})
       : super(key: key);
 
   @override
@@ -30,25 +30,24 @@ class CircularWidget extends StatelessWidget {
             width: width.w,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(100.r),
-              border: Border.all(
-                  width: border.w,
-                  color: (color == null ? Colors.grey : Colors.red.shade300)),
+              border: Border.all(width: border.w, color: color),
             ),
             child: child),
         Visibility(
-            visible: title.isNotEmpty,
+            visible: hasTitle,
             child: Column(
               children: [
                 SizedBox(
                   height: 10.h,
                 ),
-                Text(
-                  title,
-                  style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: fontsize.sp,
-                      color: color),
-                ),
+                title
+                // Text(
+                //   title,
+                //   style: TextStyle(
+                //       fontWeight: FontWeight.w600,
+                //       fontSize: fontsize.sp,
+                //       color: color),
+                // ),
               ],
             ))
       ],

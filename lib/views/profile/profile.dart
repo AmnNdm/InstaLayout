@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:insta_layout/components/appbar.dart';
 import 'package:insta_layout/components/constants.dart';
 import 'package:insta_layout/components/customwidgets.dart';
 import 'package:insta_layout/controllers/profilecontroller.dart';
@@ -15,32 +14,136 @@ class ProfileScreen extends GetView<ProfileController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: NestedScrollView(
-          headerSliverBuilder: (context, innerBoxIsScrolled) => [
-                MyAppBar(
-                  title: const Text("Username0"),
-                  leading: const Icon(Icons.lock_outline),
-                  action: [
-                    IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
-                    IconButton(onPressed: () {}, icon: const Icon(Icons.menu))
-                  ],
+    return DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+            elevation: 0.1,
+            backgroundColor: isnotDarkMode(),
+            title: Row(
+              children: [
+                Icon(
+                  Icons.lock_outline,
+                  size: 15.h,
                 ),
-                SliverToBoxAdapter(
-                  child: thatWeirdWidget(),
+                SizedBox(
+                  width: 8.w,
                 ),
-                StickyHeaderWidget()
+                const Text("Username0"),
+                IconButton(
+                    onPressed: () {},
+                    padding: EdgeInsets.zero,
+                    alignment: Alignment.centerLeft,
+                    visualDensity: VisualDensity.compact,
+                    icon: Icon(
+                      Icons.keyboard_arrow_down,
+                      size: 16.h,
+                    ))
               ],
-          body: ObxValue((RxInt rxInt) {
-            if (rxInt == 2) {
-              return AllVideos();
-            } else if (rxInt == 3) {
-              return AllTags();
-            } else {
-              return AllPosts();
-            }
-          }, controller.tab)),
-    );
+            ),
+            actions: [
+              IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
+              IconButton(onPressed: () {}, icon: const Icon(Icons.menu))
+            ],
+          ),
+          body: NestedScrollView(
+              headerSliverBuilder: (context, innerBoxIsScrolled) => [
+                    SliverToBoxAdapter(
+                      child: thatWeirdWidget(),
+                    ),
+                    SliverOverlapAbsorber(
+                      handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                          context),
+                      sliver:
+                          // const SliverToBoxAdapter(
+                          //     child: TabBar(
+                          //   tabs: [
+                          //     Tab(
+                          //       icon: Icon(Icons.grid_on_sharp),
+                          //     ),
+                          //     Tab(
+                          //       icon: Icon(Icons.play_arrow_outlined),
+                          //     ),
+                          //     Tab(
+                          //       icon: Icon(Icons.assignment_ind_outlined),
+                          //     )
+                          //   ],
+                          // ))
+                          const StickyHeaderWidget(),
+                    ),
+                  ],
+              body: TabBarView(children: [
+                Builder(builder: (BuildContext context) {
+                  return CustomScrollView(
+                    slivers: [
+                      SliverOverlapInjector(
+                          handle:
+                              NestedScrollView.sliverOverlapAbsorberHandleFor(
+                                  context)),
+                      SliverToBoxAdapter(
+                        child: AllPosts(),
+                      )
+                    ],
+                  );
+                }),
+                Builder(builder: (BuildContext context) {
+                  return CustomScrollView(
+                    slivers: [
+                      SliverOverlapInjector(
+                          handle:
+                              NestedScrollView.sliverOverlapAbsorberHandleFor(
+                                  context)),
+                      SliverToBoxAdapter(
+                        child: AllVideos(),
+                      )
+                    ],
+                  );
+                }),
+                Builder(builder: (BuildContext context) {
+                  return CustomScrollView(
+                    slivers: [
+                      SliverOverlapInjector(
+                          handle:
+                              NestedScrollView.sliverOverlapAbsorberHandleFor(
+                                  context)),
+                      SliverToBoxAdapter(
+                        child: AllTags(),
+                      )
+                    ],
+                  );
+                })
+              ])
+
+              // Builder(builder: (BuildContext context) {
+              //   return CustomScrollView(
+              //     slivers: [
+              //       SliverOverlapInjector(
+              //           handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+              //               context)),
+              //       SliverToBoxAdapter(
+              //           child: ObxValue((RxInt rxInt) {
+              //         if (rxInt.value == 2) {
+              //           return const AllVideos();
+              //         } else if (rxInt.value == 3) {
+              //           return const AllTags();
+              //         } else {
+              //           return const AllPosts();
+              //         }
+              //       }, controller.tab)),
+              //     ],
+              //   );
+              // }))
+              //  ObxValue((RxInt rxInt) {
+              //   if (rxInt.value == 2) {
+              //     return const AllVideos();
+              //   } else if (rxInt.value == 3) {
+              //     return const AllTags();
+              //   } else {
+              //     return const AllPosts();
+              //   }
+              // }, controller.tab)),
+              ),
+        ));
   }
 
   Widget thatWeirdWidget() {

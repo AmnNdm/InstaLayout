@@ -156,14 +156,28 @@ class MyHomePage extends GetView<HomeController> {
                   child: const Icon(
                     Icons.link,
                   ),
-                  title: "Link",
+                  title: Text(
+                    "Link",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 12.sp,
+                        color: isDarkMode()),
+                  ),
+                  color: Colors.grey,
                 ),
                 CircularWidget(
                   height: 56,
                   width: 59,
                   border: 1.3,
                   child: const Icon(Icons.share_outlined),
-                  title: "Share",
+                  title: Text(
+                    "Share",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 12.sp,
+                        color: isDarkMode()),
+                  ),
+                  color: Colors.grey,
                 ),
                 CircularWidget(
                   height: 56,
@@ -173,8 +187,14 @@ class MyHomePage extends GetView<HomeController> {
                     Icons.report_gmailerrorred_outlined,
                     color: Colors.red.shade400,
                   ),
-                  title: "Report",
-                  color: Colors.red.shade400,
+                  title: Text(
+                    "Report",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 12.sp,
+                        color: isDarkMode()),
+                  ),
+                  color: Colors.red.shade300,
                 )
               ],
             ),

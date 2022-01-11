@@ -84,7 +84,7 @@ class PostWidget extends StatelessWidget {
               like.toggle();
               // ontap;
             },
-            child: Container(
+            child: SizedBox(
               height: 300.h,
               width: 400.w,
               child: Image.asset(

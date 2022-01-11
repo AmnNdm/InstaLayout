@@ -6,23 +6,30 @@ import 'package:insta_layout/components/constants.dart';
 import 'package:insta_layout/controllers/profilecontroller.dart';
 
 class AllPosts extends GetView<ProfileController> {
+  const AllPosts({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return GridView.count(
+      physics: const NeverScrollableScrollPhysics(),
+      padding: EdgeInsets.only(top: 2.h),
       shrinkWrap: true,
       crossAxisCount: 3,
-      crossAxisSpacing: 1.0,
-      mainAxisSpacing: 1.0,
+      crossAxisSpacing: 2.0,
+      mainAxisSpacing: 2.0,
       children: List.generate(
-        12,
+        15,
         (index) {
           return GestureDetector(
-            onTap: () {},
-            child: Container(
+            onTap: () {
+              // ignore: avoid_print
+              print("$index clicked");
+            },
+            child: SizedBox(
               height: 10.h,
               width: 10.w,
               child: Image.asset(
-                Constants.image,
+                Constants.postImage,
                 fit: BoxFit.cover,
               ),
             ),

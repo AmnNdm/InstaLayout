@@ -46,14 +46,13 @@ class SearchController extends GetxController {
 
   List postimages = [
     Constants.postImage,
-    Constants.imagenotification,
     Constants.postImage,
-    Constants.imagenotification,
     Constants.postImage,
-    Constants.imagenotification,
     Constants.postImage,
-    Constants.imagenotification,
     Constants.postImage,
-    Constants.imagenotification,
+    Constants.postImage,
+    Constants.postImage,
+    Constants.postImage,
+    Constants.postImage,
   ];
 }

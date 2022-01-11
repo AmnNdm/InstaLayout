@@ -13,8 +13,6 @@ class Constants {
   static const comment = "assets/comment.png";
   static const send = "assets/send.png";
   static const save = "assets/save.png";
-  static const image = "assets/videoimage.jpg";
   static const requestDisclaimer =
       "Open a chat to get more info about who's messaging you. They won't know you've seen it until you accept.";
-  static const imagenotification = "assets/postimage-square.jpg";
 }

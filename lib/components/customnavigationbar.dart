@@ -75,7 +75,7 @@ class BottomBarState extends State<CustomBottomBar> {
     const SearchScreen(),
     const PostScreen(),
     const ActivityScreen(),
-    ProfileScreen()
+    const ProfileScreen()
   ];
 
   @override
