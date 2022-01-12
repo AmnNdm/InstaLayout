@@ -3,8 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:insta_layout/components/customnavigationbar.dart';
 import 'package:insta_layout/components/customwidgets.dart';
 import 'package:insta_layout/controllers/homecontroller.dart';
+import 'package:insta_layout/mainscreen.dart';
 import 'package:insta_layout/views/messages/requests.dart';
 
 import 'calls.dart';
@@ -14,44 +16,59 @@ class MessagesScreen extends GetView<HomeController> {
   const MessagesScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-            backgroundColor: isnotDarkMode(),
-            elevation: 0.0,
-            title: const Text("username"),
-            actions: [
-              Padding(
-                padding: EdgeInsets.only(right: 10.0.w),
-                child: Row(
-                  children: [
-                    GestureDetector(
-                        onTap: () {},
-                        child: Icon(
-                          Icons.video_call_outlined,
-                          size: 30.h,
-                        )),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    GestureDetector(
-                        onTap: () {},
-                        child: Icon(
-                          Icons.create,
-                          size: 24.h,
-                        )),
-                  ],
+    return WillPopScope(
+      onWillPop: () async {
+        Get.offAll(MainScreen(),
+            transition: Transition.leftToRight, duration: Duration(seconds: 2));
+        return false;
+      },
+      child: Scaffold(
+          appBar: AppBar(
+              leading: IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: () {
+                    Get.offAll(MainScreen(),
+                        transition: Transition.leftToRight,
+                        duration: Duration(seconds: 2));
+                  }),
+              automaticallyImplyLeading: false,
+              backgroundColor: isnotDarkMode(),
+              elevation: 0.0,
+              title: const Text("username"),
+              actions: [
+                Padding(
+                  padding: EdgeInsets.only(right: 10.0.w),
+                  child: Row(
+                    children: [
+                      GestureDetector(
+                          onTap: () {},
+                          child: Icon(
+                            Icons.video_call_outlined,
+                            size: 30.h,
+                          )),
+                      SizedBox(
+                        width: 10.w,
+                      ),
+                      GestureDetector(
+                          onTap: () {},
+                          child: Icon(
+                            Icons.create,
+                            size: 24.h,
+                          )),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-            bottom: PreferredSize(
-                child: buttons(context),
-                preferredSize: Size.fromHeight(
-                    MediaQuery.of(Get.context!).size.height / 16))),
-        body: SingleChildScrollView(
-          child: ObxValue((RxInt rxInt) {
-            return rxInt.value == 1 ? const Chats() : const Calls();
-          }, controller.currentTab),
-        ));
+              ],
+              bottom: PreferredSize(
+                  child: buttons(context),
+                  preferredSize: Size.fromHeight(
+                      MediaQuery.of(Get.context!).size.height / 16))),
+          body: SingleChildScrollView(
+            child: ObxValue((RxInt rxInt) {
+              return rxInt.value == 1 ? const Chats() : const Calls();
+            }, controller.currentTab),
+          )),
+    );
   }
 
   Widget buttons(BuildContext context) {

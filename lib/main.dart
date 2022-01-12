@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:insta_layout/appbindings.dart';
+import 'package:insta_layout/mainscreen.dart';
 import 'package:insta_layout/views/activity/activity.dart';
 import 'package:insta_layout/views/messages/messages.dart';
 import 'package:insta_layout/views/post.dart';
@@ -73,7 +74,7 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor: Colors.white,
             backgroundColor: Colors.white,
             canvasColor: Colors.white),
-        home: const CustomBottomBar(),
+        home: MainScreen(),
         // const SplashScreen(),
         initialRoute: "/",
         routes: {
