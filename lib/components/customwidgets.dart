@@ -102,3 +102,14 @@ Widget thisText(String title) {
     ),
   );
 }
+
+Widget silverDash() {
+  return Center(
+    child: Container(
+      height: 4.h,
+      width: 35.w,
+      decoration: BoxDecoration(
+          color: Colors.grey, borderRadius: BorderRadius.circular(10.r)),
+    ),
+  );
+}

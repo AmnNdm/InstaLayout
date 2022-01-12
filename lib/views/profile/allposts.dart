@@ -12,7 +12,7 @@ class AllPosts extends GetView<ProfileController> {
   Widget build(BuildContext context) {
     return GridView.count(
       physics: const NeverScrollableScrollPhysics(),
-      padding: EdgeInsets.only(top: 2.h),
+      padding: EdgeInsets.symmetric(vertical: 2.h),
       shrinkWrap: true,
       crossAxisCount: 3,
       crossAxisSpacing: 2.0,

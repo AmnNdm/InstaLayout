@@ -42,8 +42,34 @@ class ProfileScreen extends GetView<ProfileController> {
               ],
             ),
             actions: [
-              IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
-              IconButton(onPressed: () {}, icon: const Icon(Icons.menu))
+              IconButton(
+                  onPressed: () {
+                    Get.bottomSheet(addBottomSheet(),
+                        backgroundColor:
+                            MediaQuery.of(context).platformBrightness ==
+                                    Brightness.dark
+                                ? Colors.grey.shade900
+                                : Colors.white,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(15.r),
+                                topRight: Radius.circular(15.r))));
+                  },
+                  icon: const Icon(Icons.add_box_outlined)),
+              IconButton(
+                  onPressed: () {
+                    Get.bottomSheet(menuBottomSheet(),
+                        backgroundColor:
+                            MediaQuery.of(context).platformBrightness ==
+                                    Brightness.dark
+                                ? Colors.grey.shade900
+                                : Colors.white,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(15.r),
+                                topRight: Radius.circular(15.r))));
+                  },
+                  icon: const Icon(Icons.menu))
             ],
           ),
           body: NestedScrollView(
@@ -54,96 +80,29 @@ class ProfileScreen extends GetView<ProfileController> {
                     SliverOverlapAbsorber(
                       handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
                           context),
-                      sliver:
-                          // const SliverToBoxAdapter(
-                          //     child: TabBar(
-                          //   tabs: [
-                          //     Tab(
-                          //       icon: Icon(Icons.grid_on_sharp),
-                          //     ),
-                          //     Tab(
-                          //       icon: Icon(Icons.play_arrow_outlined),
-                          //     ),
-                          //     Tab(
-                          //       icon: Icon(Icons.assignment_ind_outlined),
-                          //     )
-                          //   ],
-                          // ))
-                          const StickyHeaderWidget(),
+                      sliver: const StickyHeaderWidget(),
                     ),
                   ],
               body: TabBarView(children: [
-                Builder(builder: (BuildContext context) {
-                  return CustomScrollView(
-                    slivers: [
-                      SliverOverlapInjector(
-                          handle:
-                              NestedScrollView.sliverOverlapAbsorberHandleFor(
-                                  context)),
-                      SliverToBoxAdapter(
-                        child: AllPosts(),
-                      )
-                    ],
-                  );
-                }),
-                Builder(builder: (BuildContext context) {
-                  return CustomScrollView(
-                    slivers: [
-                      SliverOverlapInjector(
-                          handle:
-                              NestedScrollView.sliverOverlapAbsorberHandleFor(
-                                  context)),
-                      SliverToBoxAdapter(
-                        child: AllVideos(),
-                      )
-                    ],
-                  );
-                }),
-                Builder(builder: (BuildContext context) {
-                  return CustomScrollView(
-                    slivers: [
-                      SliverOverlapInjector(
-                          handle:
-                              NestedScrollView.sliverOverlapAbsorberHandleFor(
-                                  context)),
-                      SliverToBoxAdapter(
-                        child: AllTags(),
-                      )
-                    ],
-                  );
-                })
-              ])
-
-              // Builder(builder: (BuildContext context) {
-              //   return CustomScrollView(
-              //     slivers: [
-              //       SliverOverlapInjector(
-              //           handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-              //               context)),
-              //       SliverToBoxAdapter(
-              //           child: ObxValue((RxInt rxInt) {
-              //         if (rxInt.value == 2) {
-              //           return const AllVideos();
-              //         } else if (rxInt.value == 3) {
-              //           return const AllTags();
-              //         } else {
-              //           return const AllPosts();
-              //         }
-              //       }, controller.tab)),
-              //     ],
-              //   );
-              // }))
-              //  ObxValue((RxInt rxInt) {
-              //   if (rxInt.value == 2) {
-              //     return const AllVideos();
-              //   } else if (rxInt.value == 3) {
-              //     return const AllTags();
-              //   } else {
-              //     return const AllPosts();
-              //   }
-              // }, controller.tab)),
-              ),
+                tab(const AllPosts()),
+                tab(const AllVideos()),
+                tab(const AllTags())
+              ])),
         ));
+  }
+
+  Widget tab(Widget child) {
+    return Builder(builder: (BuildContext context) {
+      return CustomScrollView(
+        slivers: [
+          SliverOverlapInjector(
+              handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context)),
+          SliverToBoxAdapter(
+            child: child,
+          )
+        ],
+      );
+    });
   }
 
   Widget thatWeirdWidget() {
@@ -175,34 +134,15 @@ class ProfileScreen extends GetView<ProfileController> {
           ),
           Row(
             children: [
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text("Edit profile"),
-                style: ButtonStyle(
-                    visualDensity: VisualDensity.compact,
-                    padding: MaterialStateProperty.all(EdgeInsets.zero),
-                    elevation: MaterialStateProperty.all(0.0),
-                    side: MaterialStateProperty.all(
-                        BorderSide(color: Colors.grey.shade300)),
-                    minimumSize:
-                        // TODO: 305.w
-                        MaterialStateProperty.all<Size>(Size(300.w, 35.h))),
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                child: Icon(
-                  Icons.keyboard_arrow_down,
-                  size: 16.h,
-                ),
-                style: ButtonStyle(
-                    visualDensity: VisualDensity.compact,
-                    padding: MaterialStateProperty.all(EdgeInsets.zero),
-                    elevation: MaterialStateProperty.all(0.0),
-                    side: MaterialStateProperty.all(
-                        BorderSide(color: Colors.grey.shade300)),
-                    minimumSize:
-                        MaterialStateProperty.all<Size>(Size(38.w, 35.h))),
-              )
+              // TODO: 305.w
+              button(Text("Edit profile"), Size(300.w, 35.h), () => null),
+              button(
+                  Icon(
+                    Icons.keyboard_arrow_down,
+                    size: 16.h,
+                  ),
+                  Size(38.w, 35.h),
+                  () => null),
             ],
           ),
           SizedBox(
@@ -224,6 +164,20 @@ class ProfileScreen extends GetView<ProfileController> {
     );
   }
 
+  Widget button(Widget child, Size size, Function()? onClicked) {
+    return ElevatedButton(
+      onPressed: onClicked,
+      child: child,
+      style: ButtonStyle(
+          visualDensity: VisualDensity.compact,
+          padding: MaterialStateProperty.all(EdgeInsets.zero),
+          elevation: MaterialStateProperty.all(0.0),
+          side: MaterialStateProperty.all(
+              BorderSide(color: Colors.grey.shade300)),
+          minimumSize: MaterialStateProperty.all<Size>(size)),
+    );
+  }
+
   Widget figure(int figure, String type) {
     return Column(
       children: [
@@ -234,6 +188,123 @@ class ProfileScreen extends GetView<ProfileController> {
         SizedBox(height: 5.h),
         Text(type)
       ],
+    );
+  }
+
+  Widget addBottomSheet() {
+    var dividerLine = Padding(
+      padding: EdgeInsets.fromLTRB(54.w, 0.0, 12.w, 0.0),
+      child: const Divider(
+        height: 0,
+      ),
+    );
+    return Container(
+      height: 305.h,
+      padding: EdgeInsets.fromLTRB(0.0, 10.h, 0.0, 16.h),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          silverDash(),
+          SizedBox(
+            height: 14.h,
+          ),
+          Center(
+            child: Text(
+              "Create",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
+            ),
+          ),
+          SizedBox(
+            height: 8.h,
+          ),
+          const Divider(
+            height: 0,
+          ),
+          createRow(Icons.grid_on_sharp, "Post"),
+          dividerLine,
+          createRow(Icons.add_circle_outline, "Story"),
+          dividerLine,
+          createRow(Icons.favorite_border_rounded, "Story Highlight"),
+          dividerLine,
+          createRow(Icons.podcasts, "Live"),
+          dividerLine,
+        ],
+      ),
+    );
+  }
+
+  createRow(IconData icon, String text) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 12.h),
+      child: Row(
+        children: [
+          Icon(
+            icon,
+            size: 24.h,
+          ),
+          SizedBox(
+            width: 14.w,
+          ),
+          Text(
+            text,
+            style: TextStyle(fontSize: 16.sp),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget menuBottomSheet() {
+    var space = SizedBox(
+      height: 18.h,
+    );
+    return Container(
+      height: 320.h,
+      padding: EdgeInsets.fromLTRB(12.w, 12.h, 10.w, 0.h),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          silverDash(),
+          SizedBox(
+            height: 20.h,
+          ),
+          menuRow(Icons.settings_outlined, "Settings"),
+          space,
+          menuRow(Icons.archive_outlined, "Archive"),
+          space,
+          menuRow(Icons.local_activity_outlined, "Your Activity"),
+          space,
+          menuRow(Icons.qr_code, "QR code"),
+          space,
+          menuRow(Icons.bookmark_outline, "Saved"),
+          space,
+          menuRow(Icons.list, "Close Friends"),
+          space,
+          menuRow(
+              Icons.health_and_safety_outlined, "COVID-19 Information Center"),
+        ],
+      ),
+    );
+  }
+
+  menuRow(IconData icon, String text) {
+    return GestureDetector(
+      onTap: () {},
+      child: Row(
+        children: [
+          Icon(
+            icon,
+            size: 26,
+          ),
+          SizedBox(
+            width: 12.w,
+          ),
+          Text(
+            text,
+            style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w400),
+          )
+        ],
+      ),
     );
   }
 }

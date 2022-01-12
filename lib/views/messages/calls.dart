@@ -29,10 +29,10 @@ class Calls extends GetView<HomeController> {
                   return Padding(
                     padding: EdgeInsets.fromLTRB(8.w, 5.h, 0.0, 5.h),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(7.r),
                       child: SizedBox(
                         height: 90.h,
-                        width: 115.w,
+                        width: 116.w,
                         child: Image.asset(
                           Constants.postImage,
                           fit: BoxFit.cover,

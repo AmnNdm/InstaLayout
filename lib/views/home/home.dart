@@ -131,7 +131,7 @@ class MyHomePage extends GetView<HomeController> {
   Widget postBottomSheet() {
     return Container(
       height: 270.h,
-      padding: EdgeInsets.fromLTRB(0.w, 10.h, 0.w, 16.h),
+      padding: EdgeInsets.fromLTRB(0.w, 10.h, 0.w, 0.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

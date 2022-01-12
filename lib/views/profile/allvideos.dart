@@ -9,7 +9,7 @@ class AllVideos extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.count(
       physics: const NeverScrollableScrollPhysics(),
-      padding: EdgeInsets.only(top: 2.h),
+      padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 1.w),
       shrinkWrap: true,
       crossAxisCount: 3,
       crossAxisSpacing: 2.0,
