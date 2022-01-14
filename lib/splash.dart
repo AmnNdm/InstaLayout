@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:insta_layout/mainscreen.dart';
 import 'package:insta_layout/views/messages/messages.dart';
 
@@ -19,16 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(
-        const Duration(seconds: 2),
-        () => Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (_) => DefaultTabController(
-                    length: 3,
-                    initialIndex: 1,
-                    child: Scaffold(
-                      body: const CustomBottomBar(),
-                    )))));
+        const Duration(seconds: 2), () => Get.to(() => MainScreen()));
   }
 
   @override
