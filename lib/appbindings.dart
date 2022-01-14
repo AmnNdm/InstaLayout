@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:insta_layout/camera/cameracontroller.dart';
 import 'package:insta_layout/controllers/activitycontroller.dart';
 import 'package:insta_layout/controllers/homecontroller.dart';
 import 'package:insta_layout/controllers/profilecontroller.dart';
@@ -11,5 +12,6 @@ class AppBindings extends Bindings {
     Get.lazyPut(() => SearchController(), fenix: true);
     Get.lazyPut(() => ActivityController(), fenix: true);
     Get.lazyPut(() => ProfileController(), fenix: true);
+    Get.lazyPut(() => CameraSController(), fenix: true);
   }
 }

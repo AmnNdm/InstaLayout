@@ -1,10 +1,10 @@
 // @dart=2.9
 
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:insta_layout/appbindings.dart';
-import 'package:insta_layout/mainscreen.dart';
 import 'package:insta_layout/splash.dart';
 import 'package:insta_layout/views/activity/activity.dart';
 import 'package:insta_layout/views/messages/messages.dart';
@@ -15,9 +15,12 @@ import 'package:insta_layout/views/search/search.dart';
 import 'package:insta_layout/views/search/searchcontent.dart';
 import 'package:insta_layout/views/search/suggestions.dart';
 
-import 'components/customnavigationbar.dart';
+import 'camera/camera.dart';
 
-void main() {
+List<CameraDescription> cameras;
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  cameras = await availableCameras();
   runApp(const MyApp());
 }
 
@@ -87,7 +90,8 @@ class MyApp extends StatelessWidget {
           "/message": (context) => const MessagesScreen(),
           "/searchcontent": (context) => const SearchContent(),
           "/explorevideos": (context) => const Suggestion(),
-          "/explore": (context) => const Explore()
+          "/explore": (context) => const Explore(),
+          "/camera": (context) => CameraScreen()
         },
         initialBinding: AppBindings(),
       ),

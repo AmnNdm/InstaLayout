@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:insta_layout/mainscreen.dart';
-import 'package:insta_layout/views/messages/messages.dart';
-
-import 'camera.dart';
 import 'components/constants.dart';
-import 'components/customnavigationbar.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);

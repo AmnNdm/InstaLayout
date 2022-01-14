@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:insta_layout/camera.dart';
+import 'package:insta_layout/camera/camera.dart';
 import 'package:insta_layout/components/customnavigationbar.dart';
 import 'package:insta_layout/views/messages/messages.dart';
 
