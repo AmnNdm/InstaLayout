@@ -11,8 +11,11 @@ class MainScreen extends StatelessWidget {
         length: 3,
         initialIndex: 1,
         child: Scaffold(
-          body: TabBarView(
-              children: [CameraScreen(), CustomBottomBar(), MessagesScreen()]),
+          body: TabBarView(children: [
+            CameraScreen(),
+            const CustomBottomBar(),
+            const MessagesScreen()
+          ]),
         ));
   }
 }

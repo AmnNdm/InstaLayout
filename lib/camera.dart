@@ -8,8 +8,10 @@ class CameraScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Get.offAll(MainScreen(),
-            transition: Transition.rightToLeft, duration: Duration(seconds: 2));
+        Get.offAll(
+          MainScreen(),
+          transition: Transition.rightToLeft,
+        );
         return false;
       },
       child: Scaffold(

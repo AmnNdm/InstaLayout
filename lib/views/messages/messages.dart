@@ -19,7 +19,7 @@ class MessagesScreen extends GetView<HomeController> {
     return WillPopScope(
       onWillPop: () async {
         Get.offAll(MainScreen(),
-            transition: Transition.leftToRight, duration: Duration(seconds: 2));
+            transition: Transition.leftToRight, duration: Duration(seconds: 1));
         return false;
       },
       child: Scaffold(
@@ -29,7 +29,7 @@ class MessagesScreen extends GetView<HomeController> {
                   onPressed: () {
                     Get.offAll(MainScreen(),
                         transition: Transition.leftToRight,
-                        duration: Duration(seconds: 2));
+                        duration: Duration(seconds: 1));
                   }),
               automaticallyImplyLeading: false,
               backgroundColor: isnotDarkMode(),
