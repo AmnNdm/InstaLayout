@@ -27,11 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     length: 3,
                     initialIndex: 1,
                     child: Scaffold(
-                      body: TabBarView(children: [
-                        CameraScreen(),
-                        const CustomBottomBar(),
-                        const MessagesScreen()
-                      ]),
+                      body: const CustomBottomBar(),
                     )))));
   }
 
