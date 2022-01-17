@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:insta_layout/components/circularwidget.dart';
-import 'package:insta_layout/components/constants.dart';
 import 'package:insta_layout/components/customwidgets.dart';
 
 class AllTags extends StatelessWidget {
@@ -10,7 +9,7 @@ class AllTags extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 80.0),
+      padding: EdgeInsets.only(top: 80.h),
       child: Column(children: [
         CircularWidget(
           height: 95,

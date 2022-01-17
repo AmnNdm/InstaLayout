@@ -135,7 +135,7 @@ class ProfileScreen extends GetView<ProfileController> {
           Row(
             children: [
               // TODO: 305.w
-              button(Text("Edit profile"), Size(300.w, 35.h), () => null),
+              button(const Text("Edit profile"), Size(300.w, 35.h), () => null),
               button(
                   Icon(
                     Icons.keyboard_arrow_down,

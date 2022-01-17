@@ -23,7 +23,8 @@ class MyHomePage extends GetView<HomeController> {
               action: [
                 GestureDetector(
                     onTap: () {
-                      Get.to(() => const MessagesScreen());
+                      Get.to(() => const MessagesScreen(),
+                          transition: Transition.rightToLeft);
                     },
                     child: Image.asset(
                       Constants.message,

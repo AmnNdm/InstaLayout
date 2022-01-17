@@ -91,7 +91,7 @@ class MyApp extends StatelessWidget {
           "/searchcontent": (context) => const SearchContent(),
           "/explorevideos": (context) => const Suggestion(),
           "/explore": (context) => const Explore(),
-          "/camera": (context) => CameraScreen()
+          "/camera": (context) => const CameraScreen()
         },
         initialBinding: AppBindings(),
       ),

@@ -1,14 +1,15 @@
+// ignore_for_file: avoid_print
+
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+// ignore: import_of_legacy_library_into_null_safe
 import '../main.dart';
+import 'imagepreview.dart';
 
 class CameraSController extends GetxController {
-  CameraController cc = CameraController(cameras[0], ResolutionPreset.max);
+  CameraController? camera;
   XFile? imageFile;
-  double itemWidth = 50.0;
-  int itemCount = 3;
   RxInt selected = 1.obs;
   FixedExtentScrollController scrollController =
       FixedExtentScrollController(initialItem: 1);
@@ -17,47 +18,36 @@ class CameraSController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // cc.value = CameraController(cameras[0], ResolutionPreset.max);
-    cc.initialize().then((value) => update());
-    // .then((value) {
-    //   if (!mounted) {
-    //     return;
-    //   }
-    //   setState(() {});
-    // });
+    camera = CameraController(cameras[0], ResolutionPreset.max);
+    camera!.initialize().then((value) => update());
   }
-
-  // InternalFinalCallback<void> get onDelete {
-  //   cc.value.dispose();
-  //   return super.onDelete;
-  // }
 
   @override
   void dispose() {
-    cc.dispose();
+    camera!.dispose();
     super.dispose();
   }
 
+  // @override
+  // InternalFinalCallback<void> get onStart {
+  //   camera = CameraController(cameras[0], ResolutionPreset.max);
+  //   camera!.initialize().then((value) => update());
+  //   return super.onStart;
+  // }
+
+  // @override
+  // InternalFinalCallback<void> get onDelete {
+  //   camera!.dispose();
+  //   return super.onDelete;
+  // }
+
   void switchCamera() {
-    if (cc.description.lensDirection == CameraLensDirection.back) {
-      cc = CameraController(cameras[1], ResolutionPreset.max);
-      cc.initialize().then((value) => update());
-      // update();
-      // .then((value) {
-      //   if (!mounted) {
-      //     return;
-      //   }
-      //   setState(() {});
-      // });
+    if (camera!.description.lensDirection == CameraLensDirection.back) {
+      camera = CameraController(cameras[1], ResolutionPreset.max);
+      camera!.initialize().then((value) => update());
     } else {
-      cc = CameraController(cameras[0], ResolutionPreset.max);
-      cc.initialize().then((value) => update());
-      // .then((value) {
-      //   if (!mounted) {
-      //     return;
-      //   }
-      //   setState(() {});
-      // });
+      camera = CameraController(cameras[0], ResolutionPreset.max);
+      camera!.initialize().then((value) => update());
     }
   }
 
@@ -66,16 +56,26 @@ class CameraSController extends GetxController {
       // if (mounted) {
       //   setState(() {
       imageFile = file;
+      update();
       // videoController?.dispose();
       // videoController = null;
       // });
-      if (file != null) print('Picture saved to ${file.path}');
+      if (file != null) {
+        print('Picture saved to ${file.path}');
+        Get.to(
+            () => ImagePreview(
+                  path: file.path,
+                ),
+            transition: Transition.noTransition);
+        // Get.to(() => ImagePreview(file.path));
+      }
+
       // }
     });
   }
 
   Future<XFile?> takePicture() async {
-    final CameraController? cameraController = cc;
+    final CameraController? cameraController = camera;
     if (cameraController == null || !cameraController.value.isInitialized) {
       print('Error: select a camera first.');
       return null;

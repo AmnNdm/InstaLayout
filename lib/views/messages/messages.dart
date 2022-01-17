@@ -3,12 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:insta_layout/components/customnavigationbar.dart';
 import 'package:insta_layout/components/customwidgets.dart';
 import 'package:insta_layout/controllers/homecontroller.dart';
 import 'package:insta_layout/mainscreen.dart';
 import 'package:insta_layout/views/messages/requests.dart';
-
 import 'calls.dart';
 import 'chats.dart';
 
@@ -18,18 +16,17 @@ class MessagesScreen extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Get.offAll(MainScreen(),
-            transition: Transition.leftToRight, duration: Duration(seconds: 1));
+        Get.offAll(() => const MainScreen(),
+            transition: Transition.leftToRight);
         return false;
       },
       child: Scaffold(
           appBar: AppBar(
               leading: IconButton(
-                  icon: Icon(Icons.arrow_back),
+                  icon: const Icon(Icons.arrow_back),
                   onPressed: () {
-                    Get.offAll(MainScreen(),
-                        transition: Transition.leftToRight,
-                        duration: Duration(seconds: 1));
+                    Get.offAll(() => const MainScreen(),
+                        transition: Transition.leftToRight);
                   }),
               automaticallyImplyLeading: false,
               backgroundColor: isnotDarkMode(),
