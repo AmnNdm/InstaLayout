@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:insta_layout/appbindings.dart';
 import 'package:insta_layout/splash.dart';
 import 'package:insta_layout/views/activity/activity.dart';
+import 'package:insta_layout/views/camera/camera.dart';
 import 'package:insta_layout/views/messages/messages.dart';
 import 'package:insta_layout/views/post.dart';
 import 'package:insta_layout/views/profile/profile.dart';
@@ -14,8 +15,6 @@ import 'package:insta_layout/views/search/explore.dart';
 import 'package:insta_layout/views/search/search.dart';
 import 'package:insta_layout/views/search/searchcontent.dart';
 import 'package:insta_layout/views/search/suggestions.dart';
-
-import 'camera/camera.dart';
 
 List<CameraDescription> cameras;
 Future<void> main() async {

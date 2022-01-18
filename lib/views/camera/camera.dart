@@ -3,11 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:camera/camera.dart';
-import 'package:insta_layout/camera/cameracontroller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:insta_layout/camera/imagepreview.dart';
+import 'package:insta_layout/controllers/cameracontroller.dart';
+import 'package:insta_layout/views/camera/postpicture.dart';
 
-import '../mainscreen.dart';
+import '../../mainscreen.dart';
+import 'imagepreview.dart';
 
 class CameraScreen extends GetView<CameraSController> {
   const CameraScreen({Key? key}) : super(key: key);
@@ -21,7 +22,7 @@ class CameraScreen extends GetView<CameraSController> {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 50.h, bottom: 20.h),
+                padding: EdgeInsets.only(bottom: 8.h, top: 28.h),
                 child: controller.camera!.value.isInitialized
                     ? ClipRRect(
                         borderRadius: BorderRadius.circular(20),
@@ -32,21 +33,24 @@ class CameraScreen extends GetView<CameraSController> {
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: Row(
                   children: [
-                    GestureDetector(
-                      onTap: () => Get.to(() => ImagePreview(),
-                          transition: Transition.noTransition),
-                      child: Container(
-                        height: 35,
-                        width: 35,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            border:
-                                Border.all(color: Colors.white, width: 2.0)),
-                      ),
-                    ),
-                    const Spacer(),
-                    typeSlider(),
-                    const Spacer(),
+                    ObxValue((RxInt rxInt) {
+                      return Visibility(
+                        visible: !(rxInt.value == 2),
+                        child: GestureDetector(
+                          onTap: () => Get.to(() => ImagePreview(),
+                              transition: Transition.noTransition),
+                          child: Container(
+                            height: 30.h,
+                            width: 30.h,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8.r),
+                                border: Border.all(
+                                    color: Colors.white, width: 2.w)),
+                          ),
+                        ),
+                      );
+                    }, controller.selected),
+                    Expanded(child: typeSlider()),
                     IconButton(
                       padding: EdgeInsets.zero,
                       visualDensity: VisualDensity.compact,
@@ -74,7 +78,7 @@ class CameraScreen extends GetView<CameraSController> {
   Widget cameraView() {
     print(controller.camera!.value.aspectRatio / 3);
     return AspectRatio(
-      aspectRatio: controller.camera!.value.aspectRatio / 3,
+      aspectRatio: controller.camera!.value.aspectRatio / 3.175,
       // controller.value.aspectRatio / 3.45,
       child: GestureDetector(
         onDoubleTap: () {
@@ -117,8 +121,8 @@ class CameraScreen extends GetView<CameraSController> {
                   },
                   child: Padding(
                     padding: EdgeInsets.only(bottom: 14.h),
-                    child: const CircleAvatar(
-                      radius: 30,
+                    child: CircleAvatar(
+                      radius: 30.r,
                       backgroundColor: Colors.white,
                     ),
                   ),
@@ -131,8 +135,8 @@ class CameraScreen extends GetView<CameraSController> {
 
   Widget typeSlider() {
     return SizedBox(
-        width: 150.0,
-        height: 30.0,
+        // width: 150.w,
+        height: 30.h,
         child: RotatedBox(
             quarterTurns: -1,
             child: ObxValue((RxInt rxInt) {
@@ -140,6 +144,11 @@ class CameraScreen extends GetView<CameraSController> {
                 magnification: 2.0,
                 onSelectedItemChanged: (x) {
                   rxInt.value = x;
+                  if (x == 0) {
+                    print("selected post at index $x");
+                    Get.to(() => PostPicture());
+                    // rxInt.value = 1;
+                  }
                 },
                 controller: controller.scrollController,
                 children: List.generate(
@@ -148,8 +157,8 @@ class CameraScreen extends GetView<CameraSController> {
                           quarterTurns: 1,
                           child: AnimatedContainer(
                             duration: const Duration(milliseconds: 300),
-                            width: index == rxInt.value ? 60.w : 50.w,
-                            height: index == rxInt.value ? 60.h : 50.h,
+                            width: index == rxInt.value ? 80.w : 70.w,
+                            height: index == rxInt.value ? 80.h : 70.h,
                             alignment: Alignment.center,
                             child: Text(
                               controller.items[index],
@@ -165,7 +174,7 @@ class CameraScreen extends GetView<CameraSController> {
                             ),
                           ),
                         )),
-                itemExtent: 50.0,
+                itemExtent: 70.0,
               );
             }, controller.selected)));
   }

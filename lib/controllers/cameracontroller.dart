@@ -2,10 +2,11 @@
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 // ignore: import_of_legacy_library_into_null_safe
-import '../main.dart';
-import 'imagepreview.dart';
+import '../../main.dart';
+import '../views/camera/imagepreview.dart';
 
 class CameraSController extends GetxController {
   CameraController? camera;
@@ -13,33 +14,26 @@ class CameraSController extends GetxController {
   RxInt selected = 1.obs;
   FixedExtentScrollController scrollController =
       FixedExtentScrollController(initialItem: 1);
-  List<String> items = ["POST", "STORY", "LIVE"];
+  List<String> items = ["P O S T", "S T O R Y", "L I V E"];
 
   @override
   void onInit() {
     super.onInit();
+    print("inside init");
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: ([SystemUiOverlay.bottom]));
     camera = CameraController(cameras[0], ResolutionPreset.max);
     camera!.initialize().then((value) => update());
   }
 
   @override
-  void dispose() {
+  void onClose() {
+    print("inside onclose");
     camera!.dispose();
-    super.dispose();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: SystemUiOverlay.values);
+    super.onClose();
   }
-
-  // @override
-  // InternalFinalCallback<void> get onStart {
-  //   camera = CameraController(cameras[0], ResolutionPreset.max);
-  //   camera!.initialize().then((value) => update());
-  //   return super.onStart;
-  // }
-
-  // @override
-  // InternalFinalCallback<void> get onDelete {
-  //   camera!.dispose();
-  //   return super.onDelete;
-  // }
 
   void switchCamera() {
     if (camera!.description.lensDirection == CameraLensDirection.back) {

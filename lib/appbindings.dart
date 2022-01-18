@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
-import 'package:insta_layout/camera/cameracontroller.dart';
 import 'package:insta_layout/controllers/activitycontroller.dart';
 import 'package:insta_layout/controllers/homecontroller.dart';
 import 'package:insta_layout/controllers/profilecontroller.dart';
 import 'package:insta_layout/controllers/searchcontroller.dart';
+import 'package:insta_layout/controllers/cameracontroller.dart';
 
 class AppBindings extends Bindings {
   @override

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:insta_layout/camera/camera.dart';
 import 'package:insta_layout/components/customnavigationbar.dart';
+import 'package:insta_layout/views/camera/camera.dart';
 import 'package:insta_layout/views/messages/messages.dart';
 
 class MainScreen extends StatelessWidget {
