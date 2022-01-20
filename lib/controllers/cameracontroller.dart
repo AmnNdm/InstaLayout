@@ -35,6 +35,14 @@ class CameraSController extends GetxController {
     super.onClose();
   }
 
+  double leftside() {
+    if (selected.value == 0) {
+      return 145;
+    } else {
+      return 90;
+    }
+  }
+
   void switchCamera() {
     if (camera!.description.lensDirection == CameraLensDirection.back) {
       camera = CameraController(cameras[1], ResolutionPreset.max);

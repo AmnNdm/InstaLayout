@@ -16,62 +16,106 @@ class CameraScreen extends GetView<CameraSController> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        child: GetBuilder<CameraSController>(builder: (controller) {
-      return Container(
-          color: Colors.black,
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(bottom: 8.h, top: 28.h),
-                child: controller.camera!.value.isInitialized
-                    ? ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: cameraView())
-                    : const AspectRatio(aspectRatio: 0.593),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
-                child: Row(
-                  children: [
-                    ObxValue((RxInt rxInt) {
-                      return Visibility(
-                        visible: !(rxInt.value == 2),
-                        child: GestureDetector(
-                          onTap: () => Get.to(() => ImagePreview(),
-                              transition: Transition.noTransition),
-                          child: Container(
-                            height: 30.h,
-                            width: 30.h,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8.r),
-                                border: Border.all(
-                                    color: Colors.white, width: 2.w)),
-                          ),
-                        ),
-                      );
-                    }, controller.selected),
-                    Expanded(child: typeSlider()),
-                    IconButton(
-                      padding: EdgeInsets.zero,
-                      visualDensity: VisualDensity.compact,
-                      icon: const Icon(
-                        Icons.cameraswitch_outlined,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        print(controller.camera!.description.toString());
-                        controller.switchCamera();
-                        print(controller.camera!.description.toString());
-                      },
+        child: Container(
+            color: Colors.black,
+            child: ObxValue((RxInt rxInt) {
+              return Stack(
+                children: [
+                  Visibility(
+                      visible: rxInt.value == 0,
+                      replacement: one(),
+                      child: two()),
+                  // rxInt.value == 0 ? two() : one(),
+                  AnimatedPositioned(
+                    width: 200,
+                    height: 35,
+                    left: rxInt.value == 0 ? 150 : 80,
+                    top: MediaQuery.of(context).size.height / 1.07,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.fastOutSlowIn,
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: (rxInt.value != 0)
+                              ? Colors.black
+                              : Colors.grey.shade800,
+                          borderRadius: BorderRadius.circular(20.0)),
+                      // child: typeSlider(),
                     ),
-                  ],
+                  ),
+                  AnimatedPositioned(
+                    width: 300,
+                    height: 35,
+                    left: rxInt.value == 0 ? 45 : 50,
+                    top: MediaQuery.of(context).size.height / 1.07,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.fastOutSlowIn,
+                    child: Container(
+                      child: typeSlider(),
+                    ),
+                  ),
+                  // typeSlider()
+                ],
+              );
+            }, controller.selected)),
+        onWillPop: () async {
+          Get.offAll(() => const MainScreen(),
+              transition: Transition.rightToLeft);
+          return false;
+        });
+  }
+
+  Widget one() {
+    return GetBuilder<CameraSController>(builder: (controller) {
+      return Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(bottom: 8.h, top: 28.h),
+            child: controller.camera!.value.isInitialized
+                ? ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: cameraView())
+                : const AspectRatio(aspectRatio: 0.593),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            child: Row(
+              children: [
+                ObxValue((RxInt rxInt) {
+                  return Visibility(
+                    visible: !(rxInt.value == 2),
+                    child: GestureDetector(
+                      onTap: () => Get.to(() => ImagePreview(),
+                          transition: Transition.noTransition),
+                      child: Container(
+                        height: 30.h,
+                        width: 30.h,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.r),
+                            border:
+                                Border.all(color: Colors.white, width: 2.w)),
+                      ),
+                    ),
+                  );
+                }, controller.selected),
+                Spacer(),
+                IconButton(
+                  padding: EdgeInsets.zero,
+                  visualDensity: VisualDensity.compact,
+                  icon: const Icon(
+                    Icons.cameraswitch_outlined,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    print(controller.camera!.description.toString());
+                    controller.switchCamera();
+                    print(controller.camera!.description.toString());
+                  },
                 ),
-              )
-            ],
-          ));
-    }), onWillPop: () async {
-      Get.offAll(() => const MainScreen(), transition: Transition.rightToLeft);
-      return false;
+              ],
+            ),
+          )
+        ],
+      );
     });
   }
 
@@ -146,10 +190,11 @@ class CameraScreen extends GetView<CameraSController> {
                   rxInt.value = x;
                   if (x == 0) {
                     print("selected post at index $x");
-                    Get.to(() => PostPicture());
+                    // Get.to(() => PostPicture());
                     // rxInt.value = 1;
                   }
                 },
+                diameterRatio: rxInt.value == 2 ? 1.5 : 5.0,
                 controller: controller.scrollController,
                 children: List.generate(
                     3,
@@ -157,8 +202,8 @@ class CameraScreen extends GetView<CameraSController> {
                           quarterTurns: 1,
                           child: AnimatedContainer(
                             duration: const Duration(milliseconds: 300),
-                            width: index == rxInt.value ? 80.w : 70.w,
-                            height: index == rxInt.value ? 80.h : 70.h,
+                            width: index == rxInt.value ? 70.w : 60.w,
+                            height: index == rxInt.value ? 70.h : 60.h,
                             alignment: Alignment.center,
                             child: Text(
                               controller.items[index],
@@ -174,8 +219,17 @@ class CameraScreen extends GetView<CameraSController> {
                             ),
                           ),
                         )),
-                itemExtent: 70.0,
+                itemExtent: 63.0,
               );
             }, controller.selected)));
+  }
+
+  Widget two() {
+    return Padding(
+      padding: EdgeInsets.only(top: 28.h),
+      child: Container(
+        color: Colors.white,
+      ),
+    );
   }
 }

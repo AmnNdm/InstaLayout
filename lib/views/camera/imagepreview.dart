@@ -16,8 +16,6 @@ class ImagePreview extends GetView<CameraSController> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: ([SystemUiOverlay.bottom]));
     return Scaffold(
       body: Container(
           color: Colors.black,
