@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:insta_layout/components/cnc.dart';
 import 'package:insta_layout/components/customwidgets.dart';
 import 'package:insta_layout/controllers/homecontroller.dart';
+import 'package:insta_layout/views/messages/userchatscreen.dart';
 
 import 'messagesearch.dart';
 
@@ -37,6 +38,7 @@ class Chats extends GetView<HomeController> {
                     Icons.camera_enhance_outlined,
                     color: Colors.grey,
                   ),
+                  ontap: () => Get.to(() => UserChatScreen("Username $index")),
                 );
               }),
         )

@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:insta_layout/components/customwidgets.dart';
 import 'package:insta_layout/controllers/homecontroller.dart';
 import 'package:insta_layout/mainscreen.dart';
+import 'package:insta_layout/models/messagesdao.dart';
 import 'package:insta_layout/views/messages/requests.dart';
 import 'calls.dart';
 import 'chats.dart';
@@ -47,7 +48,9 @@ class MessagesScreen extends GetView<HomeController> {
                         width: 10.w,
                       ),
                       GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            MessagesDao().addNewUser();
+                          },
                           child: Icon(
                             Icons.create,
                             size: 24.h,

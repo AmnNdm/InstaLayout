@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:insta_layout/appbindings.dart';
-import 'package:insta_layout/splash.dart';
 import 'package:insta_layout/views/activity/activity.dart';
 import 'package:insta_layout/views/camera/camera.dart';
 import 'package:insta_layout/views/messages/messages.dart';
@@ -15,6 +14,8 @@ import 'package:insta_layout/views/search/explore.dart';
 import 'package:insta_layout/views/search/search.dart';
 import 'package:insta_layout/views/search/searchcontent.dart';
 import 'package:insta_layout/views/search/suggestions.dart';
+
+import 'mainscreen.dart';
 
 List<CameraDescription> cameras;
 Future<void> main() async {
@@ -62,6 +63,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       builder: () => GetMaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         darkTheme: ThemeData(
             brightness: Brightness.dark,
@@ -77,9 +79,8 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor: Colors.white,
             backgroundColor: Colors.white,
             canvasColor: Colors.white),
-        home:
-            // MainScreen(),
-            const SplashScreen(),
+        home: const MainScreen(),
+        // const SplashScreen(),
         initialRoute: "/",
         routes: {
           "/search": (context) => const SearchScreen(),
