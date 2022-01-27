@@ -1,13 +1,14 @@
 // @dart=2.9
 
 import 'package:camera/camera.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:insta_layout/appbindings.dart';
 import 'package:insta_layout/views/activity/activity.dart';
 import 'package:insta_layout/views/camera/camera.dart';
-import 'package:insta_layout/views/messages/messages.dart';
+import 'package:insta_layout/views/messages/messagescreen.dart';
 import 'package:insta_layout/views/post.dart';
 import 'package:insta_layout/views/profile/profile.dart';
 import 'package:insta_layout/views/search/explore.dart';
@@ -20,6 +21,7 @@ import 'mainscreen.dart';
 List<CameraDescription> cameras;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   cameras = await availableCameras();
   runApp(const MyApp());
 }

@@ -7,7 +7,7 @@ import 'package:insta_layout/components/customwidgets.dart';
 import 'package:insta_layout/components/postwidget.dart';
 import 'package:insta_layout/controllers/homecontroller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:insta_layout/views/messages/messages.dart';
+import 'package:insta_layout/views/messages/messagescreen.dart';
 
 class MyHomePage extends GetView<HomeController> {
   const MyHomePage({Key? key}) : super(key: key);

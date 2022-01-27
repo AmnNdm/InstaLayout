@@ -1,17 +1,18 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:insta_layout/components/customwidgets.dart';
-import 'package:insta_layout/controllers/homecontroller.dart';
+import 'package:insta_layout/controllers/messagecontroller.dart';
 import 'package:insta_layout/mainscreen.dart';
-import 'package:insta_layout/models/messagesdao.dart';
 import 'package:insta_layout/views/messages/requests.dart';
 import 'calls.dart';
-import 'chats.dart';
+import 'inbox.dart';
 
-class MessagesScreen extends GetView<HomeController> {
+class MessagesScreen extends GetView<MessageController> {
   const MessagesScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -48,8 +49,26 @@ class MessagesScreen extends GetView<HomeController> {
                         width: 10.w,
                       ),
                       GestureDetector(
-                          onTap: () {
-                            MessagesDao().addNewUser();
+                          onTap: () async {
+                            List<User> u = [];
+                            controller.alluserRef.once().then((event) {
+                              final data = event.snapshot.value as Map;
+                              if (data == null) {
+                                controller.user.value = 1;
+                                controller.addNewUser();
+                              } else {
+                                data.forEach((key, value) {
+                                  final v = Map<dynamic, dynamic>.from(value);
+                                  User user =
+                                      User(id: v["id"] /*, name: v["name"]*/);
+                                  u.add(user);
+                                  print("length: ${u.length}");
+                                });
+                                print("last: ${u.last.id}");
+                                controller.user.value = (u.length) + 1;
+                                controller.addNewUser();
+                              }
+                            });
                           },
                           child: Icon(
                             Icons.create,
@@ -65,7 +84,7 @@ class MessagesScreen extends GetView<HomeController> {
                       MediaQuery.of(Get.context!).size.height / 16))),
           body: SingleChildScrollView(
             child: ObxValue((RxInt rxInt) {
-              return rxInt.value == 1 ? const Chats() : const Calls();
+              return rxInt.value == 1 ? Inbox() : const Calls();
             }, controller.currentTab),
           )),
     );

@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 import 'package:insta_layout/components/cnc.dart';
 import 'package:insta_layout/components/constants.dart';
 import 'package:insta_layout/components/customwidgets.dart';
-import 'package:insta_layout/controllers/homecontroller.dart';
+import 'package:insta_layout/controllers/messagecontroller.dart';
 
-class Calls extends GetView<HomeController> {
+class Calls extends GetView<MessageController> {
   const Calls({Key? key}) : super(key: key);
 
   @override

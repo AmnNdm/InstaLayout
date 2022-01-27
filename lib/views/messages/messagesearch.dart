@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 import 'package:insta_layout/components/appbar.dart';
 import 'package:insta_layout/components/cnc.dart';
 import 'package:insta_layout/components/customwidgets.dart';
-import 'package:insta_layout/controllers/homecontroller.dart';
+import 'package:insta_layout/controllers/messagecontroller.dart';
 
-class MessageSearchScreen extends GetView<HomeController> {
+class MessageSearchScreen extends GetView<MessageController> {
   const MessageSearchScreen({Key? key}) : super(key: key);
 
   @override

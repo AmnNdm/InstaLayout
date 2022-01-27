@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:insta_layout/components/constants.dart';
 
@@ -59,5 +60,11 @@ class HomeController extends GetxController {
     return (likes -= 1).value;
   }
 
-  RxInt currentTab = 1.obs;
+  @override
+  void onInit() {
+    super.onInit();
+    print("inside init");
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: SystemUiOverlay.values);
+  }
 }

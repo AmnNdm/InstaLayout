@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:insta_layout/components/customnavigationbar.dart';
 import 'package:insta_layout/views/camera/camera.dart';
-import 'package:insta_layout/views/messages/messages.dart';
+import 'package:insta_layout/views/messages/messagescreen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({Key? key}) : super(key: key);
