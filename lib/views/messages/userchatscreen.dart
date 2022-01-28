@@ -8,11 +8,10 @@ import 'package:insta_layout/controllers/messagecontroller.dart';
 class UserChatScreen extends GetView<MessageController> {
   String userid;
   UserChatScreen(this.userid, {Key? key}) : super(key: key);
-  List<Message> messagesList = [];
 
   @override
   Widget build(BuildContext context) {
-    print("at build: ${messagesList.length}");
+    print("at build: ${controller.messagesList.length}");
     return Scaffold(
       appBar: AppBar(
         title: Text("user$userid"),
@@ -38,7 +37,7 @@ class UserChatScreen extends GetView<MessageController> {
     return StreamBuilder(
         stream: controller.dbRef.child(userid).onValue,
         builder: (context, snapshot1) {
-          messagesList.clear();
+          controller.messagesList.clear();
           print(controller.dbRef.child(userid).onChildChanged.length);
           String otheruser = userid == "1" ? "2" : "1";
           print(userid);
@@ -47,73 +46,47 @@ class UserChatScreen extends GetView<MessageController> {
             return StreamBuilder(
                 stream: controller.dbRef.child(otheruser).onValue,
                 builder: (context, snapshot2) {
-                  messagesList.clear();
+                  controller.messagesList.clear();
 
                   if (snapshot1.hasData && snapshot2.hasData) {
                     final data1 =
                         (snapshot1.data as DatabaseEvent).snapshot.value as Map;
+                    controller.messagedata(data1);
                     final data2 =
                         (snapshot2.data as DatabaseEvent).snapshot.value as Map;
-                    data1.forEach((key, value) {
-                      final v1 = Map<dynamic, dynamic>.from(value);
-                      Message m1 = Message(
-                          content: v1["content"],
-                          type: v1["type"],
-                          time: v1["time"]);
-                      messagesList.add(m1);
-                      print("for data 1: ${messagesList.length}");
-                    });
-                    data2.forEach((key, value) {
-                      final v2 = Map<dynamic, dynamic>.from(value);
-                      Message m2 = Message(
-                          content: v2["content"],
-                          type: v2["type"],
-                          time: v2["time"]);
-                      messagesList.add(m2);
-                      print("for data 2: ${messagesList.length}");
-                    });
-                    messagesList.sort((b, a) => a.time.compareTo(b.time));
-
-                    print("complete list: ${messagesList.length}");
+                    controller.messagedata(data2);
+                    print("complete list: ${controller.messagesList.length}");
                   }
-                  messagesList.toSet();
-                  return messageListWidget();
+                  return messageList();
                 });
           } else {
             if (snapshot1.hasData) {
               final data1 =
                   (snapshot1.data as DatabaseEvent).snapshot.value as Map;
-              data1.forEach((key, value) {
-                final v1 = Map<dynamic, dynamic>.from(value);
-                Message m1 = Message(
-                    content: v1["content"], type: v1["type"], time: v1["time"]);
-                messagesList.add(m1);
-                print("for data 1: ${messagesList.length}");
-              });
-              messagesList.sort((b, a) => a.time.compareTo(b.time));
+              controller.messagedata(data1);
 
-              print("complete list: ${messagesList.length}");
+              print("complete list: ${controller.messagesList.length}");
             }
-            return messageListWidget();
+            return messageList();
           }
         });
   }
 
-  messageListWidget() {
+  Widget messageList() {
     return Padding(
       padding: EdgeInsets.only(bottom: 58.h),
       child: ListView.builder(
           // controller: controller.scrollController,
           shrinkWrap: true,
           reverse: true,
-          itemCount: messagesList.length,
+          itemCount: controller.messagesList.length,
           itemBuilder: (context, index) {
-            return messageWidget(messagesList[index]);
+            return messageWidget(controller.messagesList[index]);
           }),
     );
   }
 
-  messageWidget(Message m) {
+  Widget messageWidget(Message m) {
     return Padding(
       padding: EdgeInsets.fromLTRB(8.w, 10.h, 8.w, 10.h),
       child: Align(
@@ -155,7 +128,7 @@ class UserChatScreen extends GetView<MessageController> {
     );
   }
 
-  inputFieldWidget() {
+  Widget inputFieldWidget() {
     return TextField(
       controller: controller.txtedtcontroller,
       cursorColor: Colors.grey.shade600,

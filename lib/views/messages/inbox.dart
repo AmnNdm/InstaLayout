@@ -12,8 +12,6 @@ import 'messagesearch.dart';
 class Inbox extends GetView<MessageController> {
   Inbox({Key? key}) : super(key: key);
 
-  List<User> users = [];
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -35,7 +33,7 @@ class Inbox extends GetView<MessageController> {
     return StreamBuilder(
       stream: controller.alluserRef.onValue,
       builder: (context, snapshot) {
-        users.clear();
+        controller.users.clear();
         if (snapshot.hasData && !snapshot.hasError) {
           final data = (snapshot.data! as DatabaseEvent).snapshot.value as Map;
           if (data == null) {
@@ -46,39 +44,23 @@ class Inbox extends GetView<MessageController> {
               Text("Add New User"),
             ]);
           } else {
-            data.forEach((key, value) {
-              final v = Map<dynamic, dynamic>.from(value);
-              User u = User(id: v["id"] /*, name: v["name"]*/);
-              users.add(u);
-
-              // users.sort(/*(a, b) => a.id.compareTo(b.id)*/);
-              print(users.length);
-            });
-          }
-
-          for (User eachuser in users) {
-            for (User user in users) {
-              if (int.parse(eachuser.id) < int.parse(user.id)) {
-                String id = eachuser.id;
-                eachuser.id = user.id;
-                user.id = id;
-              }
-            }
+            controller.userdata(data);
           }
 
           return ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: users.length,
+              itemCount: controller.users.length,
               itemBuilder: (context, index) {
                 return CNCWidget(
                   userImage: controller.images[index],
-                  title: "${users[index].id}",
+                  title: "${controller.users[index].id}",
                   trailing: const Icon(
                     Icons.camera_enhance_outlined,
                     color: Colors.grey,
                   ),
-                  ontap: () => Get.to(() => UserChatScreen(users[index].id)),
+                  ontap: () =>
+                      Get.to(() => UserChatScreen(controller.users[index].id)),
                 );
               });
         } else {

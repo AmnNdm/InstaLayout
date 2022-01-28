@@ -49,27 +49,7 @@ class MessagesScreen extends GetView<MessageController> {
                         width: 10.w,
                       ),
                       GestureDetector(
-                          onTap: () async {
-                            List<User> u = [];
-                            controller.alluserRef.once().then((event) {
-                              final data = event.snapshot.value as Map;
-                              if (data == null) {
-                                controller.user.value = 1;
-                                controller.addNewUser();
-                              } else {
-                                data.forEach((key, value) {
-                                  final v = Map<dynamic, dynamic>.from(value);
-                                  User user =
-                                      User(id: v["id"] /*, name: v["name"]*/);
-                                  u.add(user);
-                                  print("length: ${u.length}");
-                                });
-                                print("last: ${u.last.id}");
-                                controller.user.value = (u.length) + 1;
-                                controller.addNewUser();
-                              }
-                            });
-                          },
+                          onTap: controller.addButtonClick,
                           child: Icon(
                             Icons.create,
                             size: 24.h,
@@ -117,7 +97,7 @@ class MessagesScreen extends GetView<MessageController> {
     );
   }
 
-  tabButton(BuildContext context, String title, bool isactive) {
+  Widget tabButton(BuildContext context, String title, bool isactive) {
     return Container(
       height: 50.h,
       width: 120.w,
