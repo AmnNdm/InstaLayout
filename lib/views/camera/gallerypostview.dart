@@ -11,6 +11,7 @@ class PostScreen extends GetView<CameraSController> {
     return Scaffold(
         appBar: AppBar(
           title: const Text("PostPicture Screen"),
+          automaticallyImplyLeading: false,
         ),
         body: Padding(
           padding: EdgeInsets.only(top: 28.h),

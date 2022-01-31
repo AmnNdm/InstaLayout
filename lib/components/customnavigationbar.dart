@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:insta_layout/components/constants.dart';
 import 'package:insta_layout/views/activity/activity.dart';
-import 'package:insta_layout/views/camera/galleryview.dart';
+import 'package:insta_layout/views/camera/gallerypostview.dart';
 import 'package:insta_layout/views/home/home.dart';
 import 'package:insta_layout/views/search/search.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';

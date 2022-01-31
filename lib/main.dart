@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import 'package:insta_layout/appbindings.dart';
 import 'package:insta_layout/views/activity/activity.dart';
 import 'package:insta_layout/views/camera/camera.dart';
-import 'package:insta_layout/views/camera/galleryview.dart';
+import 'package:insta_layout/views/camera/gallerypostview.dart';
 import 'package:insta_layout/views/messages/messagescreen.dart';
 import 'package:insta_layout/views/profile/profile.dart';
 import 'package:insta_layout/views/search/explore.dart';

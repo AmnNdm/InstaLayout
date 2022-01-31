@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:insta_layout/controllers/cameracontroller.dart';
 import 'package:insta_layout/views/camera/cameraview.dart';
-import 'package:insta_layout/views/camera/galleryview.dart';
+import 'package:insta_layout/views/camera/gallerypostview.dart';
 
 import '../../mainscreen.dart';
 
