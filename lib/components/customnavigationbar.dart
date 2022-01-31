@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:insta_layout/components/constants.dart';
 import 'package:insta_layout/views/activity/activity.dart';
+import 'package:insta_layout/views/camera/galleryview.dart';
 import 'package:insta_layout/views/home/home.dart';
 import 'package:insta_layout/views/search/search.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'customwidgets.dart';
-import '../views/post.dart';
 import '../views/profile/profile.dart';
 
 class CustomBottomBar extends StatefulWidget {
@@ -50,6 +50,9 @@ class BottomBarState extends State<CustomBottomBar> {
         ),
         activeColorPrimary: color,
         inactiveColorPrimary: color,
+        onPressed: (p0) {
+          pushNewScreen(context, screen: const PostScreen(), withNavBar: false);
+        },
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(

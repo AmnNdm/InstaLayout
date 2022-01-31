@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:insta_layout/controllers/cameracontroller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class GalleryView extends GetView<CameraSController> {
-  const GalleryView({Key? key}) : super(key: key);
+class PostScreen extends GetView<CameraSController> {
+  const PostScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

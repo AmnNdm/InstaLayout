@@ -23,7 +23,7 @@ class CameraScreen extends GetView<CameraSController> {
                   Visibility(
                       visible: rxInt.value == 0,
                       replacement: const CameraView(),
-                      child: const GalleryView()),
+                      child: const PostScreen()),
                   AnimatedPositioned(
                     width: 200,
                     height: 35,
