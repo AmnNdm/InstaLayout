@@ -51,7 +51,10 @@ class BottomBarState extends State<CustomBottomBar> {
         activeColorPrimary: color,
         inactiveColorPrimary: color,
         onPressed: (p0) {
-          pushNewScreen(context, screen: const PostScreen(), withNavBar: false);
+          pushNewScreen(context,
+              screen: PostScreen(),
+              withNavBar: false,
+              pageTransitionAnimation: PageTransitionAnimation.slideRight);
         },
       ),
       PersistentBottomNavBarItem(
@@ -76,7 +79,7 @@ class BottomBarState extends State<CustomBottomBar> {
   final List<Widget> screens = [
     const MyHomePage(),
     const SearchScreen(),
-    const PostScreen(),
+    PostScreen(),
     const ActivityScreen(),
     const ProfileScreen()
   ];

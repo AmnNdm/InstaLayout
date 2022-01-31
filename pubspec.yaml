@@ -45,6 +45,9 @@ dependencies:
   camera:
   path_provider:
   path:
+  image_picker:
+  storage_path:
+  permission_handler:
 
 # for firebase database
   firebase_database:
