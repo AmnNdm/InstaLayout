@@ -1,9 +1,12 @@
 // ignore_for_file: avoid_print
 
+import 'dart:convert';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:storage_path/storage_path.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import '../../main.dart';
 import '../views/camera/imagepreview.dart';
@@ -22,6 +25,7 @@ class CameraSController extends GetxController {
     print("inside init");
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: ([SystemUiOverlay.bottom]));
+    getimagesPath();
     camera = CameraController(cameras[0], ResolutionPreset.max);
     camera!.initialize().then((value) => update());
   }
@@ -95,5 +99,52 @@ class CameraSController extends GetxController {
       print(e);
       return null;
     }
+  }
+
+  // gallery post view
+
+  List<FileModel> files = [];
+  FileModel? selectedModel;
+  String? image;
+  BoxFit fit = BoxFit.cover;
+
+  getimagesPath() async {
+    // Permission permission = Permission.storage;
+    var imagepath = await StoragePath.imagesPath;
+    var images = jsonDecode(imagepath) as List;
+    files = images.map<FileModel>((e) => FileModel.fromJson(e)).toList();
+    print("inside path");
+    if (files != null && files.length > 0) {
+      print("inside files");
+      // setState(() {
+      selectedModel = files[0];
+      image = files[0].files[0];
+      update();
+      // });
+    }
+  }
+
+  getitems() {
+    return files
+        .map((e) => DropdownMenuItem(
+              child: Text(
+                e.folder,
+                style: const TextStyle(color: Colors.black),
+              ),
+              value: e,
+            ))
+        .toList();
+  }
+}
+
+class FileModel {
+  late List<String> files;
+  late String folder;
+
+  FileModel({required this.files, required this.folder});
+
+  FileModel.fromJson(Map<String, dynamic> json) {
+    files = json['files'].cast<String>();
+    folder = json['folderName'];
   }
 }

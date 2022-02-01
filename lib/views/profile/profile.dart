@@ -77,6 +77,7 @@ class ProfileScreen extends GetView<ProfileController> {
                     SliverToBoxAdapter(
                       child: thatWeirdWidget(),
                     ),
+                    // make this widget stick through SliverOverlapAbsorber with SliverPersistentHeader
                     SliverOverlapAbsorber(
                       handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
                           context),
