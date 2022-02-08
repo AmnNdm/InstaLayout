@@ -1,94 +1,97 @@
+import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:insta_layout/controllers/cameracontroller.dart';
-
+import 'package:storage_path/storage_path.dart';
 import '../../mainscreen.dart';
+import 'filemodel.dart';
 
-class PostScreen extends /*StatefulWidget*/ GetView<CameraSController> {
+class PostScreen extends StatefulWidget /* GetView<CameraSController>*/ {
   PostScreen({Key? key}) : super(key: key);
 
-//   @override
-//   State<PostScreen> createState() => _PostScreenState();
-// }
+  @override
+  State<PostScreen> createState() => _PostScreenState();
+}
 
-// class _PostScreenState extends State<PostScreen> {
-  // List<FileModel> files = [];
-  // FileModel? selectedModel;
-  // String? image;
-  // BoxFit fit = BoxFit.cover;
+class _PostScreenState extends State<PostScreen> {
+  List<FileModel> files = [];
+  FileModel? selectedModel;
+  String? image;
+  BoxFit fit = BoxFit.cover;
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-  //       overlays: ([SystemUiOverlay.bottom]));
-  //   getimagesPath();
-  // }
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: ([SystemUiOverlay.bottom]));
+    getimagesPath();
+  }
 
-  // getimagesPath() async {
-  //   // Permission permission = Permission.storage;
-  //   var imagepath = await StoragePath.imagesPath;
-  //   var images = jsonDecode(imagepath) as List;
-  //   files = images.map<FileModel>((e) => FileModel.fromJson(e)).toList();
-  //   print("inside path");
-  //   if (files != null && files.length > 0) {
-  //     print("inside files");
-  //     setState(() {
-  //       selectedModel = files[0];
-  //       image = files[0].files[0];
-  //     });
-  //   }
-  // }
+  getimagesPath() async {
+    // Permission permission = Permission.storage;
+    var imagepath = await StoragePath.imagesPath;
+    var images = jsonDecode(imagepath) as List;
+    files = images.map<FileModel>((e) => FileModel.fromJson(e)).toList();
+    print("inside path");
+    if (files != null && files.length > 0) {
+      print("inside files");
+      setState(() {
+        selectedModel = files[0];
+        image = files[0].files[0];
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: SafeArea(
-        minimum: EdgeInsets.only(top: 26.h),
-        child: Container(
-          color: Colors.white,
-          child: Column(
-            children: [
-              titlebar(),
-              const Divider(
-                height: 0,
-              ),
-              pictureview(),
-              const Divider(
-                height: 0,
-              ),
-              secondtitlebar(),
-              controller.selectedModel == null ? Container() : allimages()
-            ],
+      body: SingleChildScrollView(
+        child: SafeArea(
+          minimum: EdgeInsets.only(top: 26.h),
+          child: Container(
+            color: Colors.white,
+            child: Column(
+              children: [
+                titlebar(),
+                const Divider(
+                  height: 0,
+                ),
+                pictureview(),
+                const Divider(
+                  height: 0,
+                ),
+                secondtitlebar(),
+                selectedModel == null ? Container() : allimages()
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  // getitems() {
-  //   return files
-  //       .map((e) => DropdownMenuItem(
-  //             child: Text(
-  //               e.folder,
-  //               style: const TextStyle(color: Colors.black),
-  //             ),
-  //             value: e,
-  //           ))
-  //       .toList();
-  // }
+  getitems() {
+    return files
+        .map((e) => DropdownMenuItem(
+              child: Text(
+                e.folder,
+                style: const TextStyle(color: Colors.black),
+              ),
+              value: e,
+            ))
+        .toList();
+  }
 
-  // @override
-  // void dispose() {
-  //   print("dispose from pose screen");
-  //   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-  //       overlays: SystemUiOverlay.values);
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    print("dispose from pose screen");
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: SystemUiOverlay.values);
+    super.dispose();
+  }
 
   titlebar() {
     return Container(
@@ -125,15 +128,16 @@ class PostScreen extends /*StatefulWidget*/ GetView<CameraSController> {
     return Container(
       height: MediaQuery.of(Get.context!).size.height * 0.45,
       width: MediaQuery.of(Get.context!).size.width,
-      child: controller.image != null
+      color: Colors.black,
+      child: image != null
           ? Stack(
               children: [
                 Container(
                   height: MediaQuery.of(Get.context!).size.height * 0.45,
                   width: MediaQuery.of(Get.context!).size.width,
                   child: Image.file(
-                    File(controller.image!),
-                    fit: controller.fit,
+                    File(image!),
+                    fit: fit,
                   ),
                 ),
                 Padding(
@@ -142,17 +146,15 @@ class PostScreen extends /*StatefulWidget*/ GetView<CameraSController> {
                     alignment: Alignment.bottomLeft,
                     child: GestureDetector(
                       onTap: () {
-                        controller.fit == BoxFit.cover
-                            ?
-                            // ? setState(() {
-                            controller.fit =
-                                // BoxFit.fitWidth;
-                                BoxFit.contain
-                            :
-                            // })
-                            // : setState(() {
-                            controller.fit = BoxFit.cover;
-                        // });
+                        fit == BoxFit.cover
+                            ? setState(() {
+                                fit =
+                                    // BoxFit.fitWidth;
+                                    BoxFit.contain;
+                              })
+                            : setState(() {
+                                fit = BoxFit.cover;
+                              });
                       },
                       child: CircleAvatar(
                           backgroundColor: Colors.grey,
@@ -188,14 +190,14 @@ class PostScreen extends /*StatefulWidget*/ GetView<CameraSController> {
                 alignment: Alignment.centerLeft,
                 iconEnabledColor: Colors.black,
                 icon: Icon(Icons.keyboard_arrow_down),
-                items: controller.getitems(),
+                items: getitems(),
                 onChanged: (FileModel? item) {
-                  controller.image = item!.files[0];
-                  // setState(() {
-                  controller.selectedModel = item;
-                  // });
+                  image = item!.files[0];
+                  setState(() {
+                    selectedModel = item;
+                  });
                 },
-                value: controller.selectedModel,
+                value: selectedModel,
                 isExpanded: true,
                 isDense: true,
               )),
@@ -222,17 +224,18 @@ class PostScreen extends /*StatefulWidget*/ GetView<CameraSController> {
       // height: MediaQuery.of(context).size.height * 0.365,
       // color: Colors.blue,
       child: GridView.builder(
+          physics: NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 4, crossAxisSpacing: 1.5, mainAxisSpacing: 1.5),
-          itemCount: controller.selectedModel!.files.length,
+          itemCount: selectedModel!.files.length,
           itemBuilder: (_, i) {
-            var file = controller.selectedModel!.files[i];
+            var file = selectedModel!.files[i];
             return GestureDetector(
               onTap: () {
-                // setState(() {
-                controller.image = file;
-                // });
+                setState(() {
+                  image = file;
+                });
               },
               child: Image.file(
                 File(file),
