@@ -54,7 +54,7 @@ class Inbox extends GetView<MessageController> {
               itemBuilder: (context, index) {
                 return CNCWidget(
                   userImage: controller.images[index],
-                  title: "${controller.users[index].id}",
+                  title: controller.users[index].id,
                   trailing: const Icon(
                     Icons.camera_enhance_outlined,
                     color: Colors.grey,

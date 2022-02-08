@@ -1,12 +1,8 @@
 // ignore_for_file: avoid_print
-
-import 'dart:convert';
-
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:storage_path/storage_path.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import '../../main.dart';
 import '../views/camera/imagepreview.dart';
